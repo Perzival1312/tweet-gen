@@ -4,11 +4,11 @@ words_list = f.readlines()
 f.close()
 word_count = sys.argv[1:]
 final_words = []
-try:
-    int(word_count)
+try: # get random words from dict
+    int(word_count[0])
     for _ in range(int(word_count[0])):
         final_words.append(random.choice(words_list)) 
-except:
+except: # get words from dict starting wiht a certain string
     word_fragment = word_count[0]
     for words in words_list:
         temp_word = words[:len(word_fragment)]
