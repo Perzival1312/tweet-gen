@@ -7,7 +7,6 @@ str_input = sys.argv[1:]
 #     str_input.remove(choice)
 # print(shuffled)
 
-length = len(str_input)
 for index, value in enumerate(str_input):
     choice = random.choice(str_input)
     choice_index = str_input.index(choice)
