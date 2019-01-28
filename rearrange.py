@@ -15,7 +15,3 @@ for index, value in enumerate(str_input):
     str_input[index] = choice
     str_input[choice_index] = temp
 print(str_input)
-    
-
-
-# random.randrange(len(words_list))[:-1]
