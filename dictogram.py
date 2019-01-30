@@ -1,4 +1,5 @@
 import sys, string
+string.punctuation += "”“’‘—"
 
 f = open(str(sys.argv[1:][0]), 'r')
 word_list = f.readlines()
@@ -34,8 +35,6 @@ def frequency(word, histogram):
         return histogram[word]
     else:
         return("word is not in source text")
-
-
 
 histogram = make_histogram(words_list)
 unique_words(histogram)
