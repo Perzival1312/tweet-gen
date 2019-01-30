@@ -10,10 +10,21 @@ words_list = []
 for strings in word_list:
     words_list += strings.split()
 
-for words in words_list:
-    if words in histogram:
-        histogram[words] += 1
-    else:
-        histogram[words] = 1
+def make_histogram(source):
+    histogram = {}
+    for words in source:
+        if words in histogram:
+            histogram[words] += 1
+        else:
+            histogram[words] = 1
+    return histogram
 
-print(histogram['Frankenstein'])
+def unique_words(histogram):
+    unique_word_counter = 0
+    for values in histogram.items():
+        if values == 1:
+            unique_word_counter += 1
+    return unique_word_counter
+
+histogram = make_histogram(words_list)
+print(unique_words(histogram))
