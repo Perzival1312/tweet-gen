@@ -26,5 +26,13 @@ def unique_words(histogram):
             unique_word_counter += 1
     return unique_word_counter
 
+def frequency(word, histogram):
+    if word in histogram:
+        return histogram[word]
+    else:
+        return("word is not in source text")
+
+
 histogram = make_histogram(words_list)
 print(unique_words(histogram))
+print(frequency('the', histogram))
