@@ -15,12 +15,17 @@ for word in range(len(words_list)):
     words_list[word] = words_list[word].translate(table).lower()
 
 def make_histogram(source):
+    print(len(source))
     histogram = []
     for words in source:
-        if words not in histogram:
-            histogram += [words, 1]
+        if len(histogram) == 0:
+            histogram.append([words, 1])
         else:
-            histogram[histogram.index(words)][1] += "1"
+            for entries in histogram:
+                if words != entries[0]:
+                    histogram.append([words, 1])
+                else:
+                    entries[1] += 1
     return histogram
 
 # def unique_words(histogram):
