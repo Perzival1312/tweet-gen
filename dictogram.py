@@ -39,5 +39,3 @@ def frequency(word, histogram):
 histogram = make_histogram(words_list)
 unique_words(histogram)
 frequency('the', histogram)
-# print(unique_words(histogram))
-# print(frequency('the', histogram))

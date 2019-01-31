@@ -24,9 +24,4 @@ def make_histogram(source):
         histogram.append((words, count))
     return list(set(histogram))
 
-# def unique_words(histogram):
-#     unique_word_counter = 0
-#     for 
-
 histogram = make_histogram(words_list)
-print(histogram)
