@@ -37,7 +37,6 @@ for index, sets in enumerate(histogram):
         sets[1] = (sets[1]/total) + histogram[index-1][1]
     else:
         sets[1] = sets[1]/total
-# print(histogram)
 
 def sample():
     chance = random.random()
