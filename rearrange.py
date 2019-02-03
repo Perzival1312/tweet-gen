@@ -48,4 +48,21 @@ str_input = sys.argv[1:]
 for index, words in enumerate(str_input):
     str_input[index] =  words[::-1]
 str_input = str_input[::-1]
-print(" ".join(str_input))
+cowsay_string = " ".join(str_input)
+top_string = "".join(['_'] * (len(cowsay_string)+1))
+space_string = "".join([' '] * (len(cowsay_string)+1))
+bottom_string = "".join(['-'] * (len(cowsay_string)+1))
+
+s = """
+ {}
+/ {} \\
+\\{} /
+ {}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||
+"""
+
+print(s.format(top_string, cowsay_string, space_string, bottom_string))
