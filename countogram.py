@@ -14,40 +14,31 @@ for strings in word_list:
 for word in range(len(words_list)):
     words_list[word] = words_list[word].translate(table).lower()
 
-
-# histogram = {count: {count: [words, words, words]}}
-# words = {count: [words, words, words]}
-# histogram = {count: [words, words, words]}
-# words = [words, words]
-
-
-
-
-
 def make_histogram(source):
     histogram = {1:[]}
     for word in source:
+        flag = False
         for count, words in histogram.items():
-            print(repr(count), repr(words), repr(word))
             if word in words:
-                print("contains used word")
-                if (count + 1) not in histogram:
-                    print("in word list without count")
-                    print(count)
-                    histogram[count+1] = [word]
-                    histogram[count].remove(word)
-                    break
-                else:
-                    print("in word list with count")
-                    print(count)
-                    histogram[count+1].append(word)
-                    break
+                flag = True
+        if flag:
+            if (count + 1) not in histogram:
+                histogram[count+1] = [word]
+                histogram[count].remove(word)
             else:
-                print("new word")
+                histogram[count+1].append(word)
+        else:
                 histogram[1].append(word)
-                break
-        print(repr(histogram), "\n\n\n")
+
+    to_remove = []
+    for count, words in histogram.items():
+        if len(words) == 0:
+            to_remove.append(count)
+
+    for index in to_remove:
+        histogram.pop(index)
     return histogram
+
 histogram = make_histogram(words_list)
 print(histogram)
             
