@@ -21,30 +21,24 @@ for words in words_list:
         histogram[words] = 1
 
 times = int(sys.argv[2:3][0])
-total = 0
+total = sum(histogram.values())
 sampling = {}
-for key, value in histogram.items():
-    total += value
-old_key = ""
-for key, value in histogram.items():
-    if old_key:
-        histogram[key] = (value/total)+histogram[old_key]
-    else:
-        histogram[key] = value/total
-    old_key = key
 
+# changes frquency to range of probability of picking key
+prev_val = 0
+for key, value in histogram.items():
+    histogram[key] = (value/total)+prev_val
+    prev_val = histogram[key]
+
+# gets a random word based on frequency range
 def sample():
     chance = random.random()
-    old_key = ""
+    prev_val = 0
     choice = ""
     for key, value in histogram.items():
-        if old_key:
-            if chance < value and chance > histogram[old_key]:
-                choice = key
-        else:
-            if chance < value:
-                choice = key
-        old_key = key
+        if chance < value and chance > prev_val:
+            choice = key
+        prev_val = histogram[key]
     return choice
 
 for _ in range(times):
@@ -54,4 +48,5 @@ for _ in range(times):
     else:
         sampling[word] = 1
 
+print(histogram)
 print(sampling)
