@@ -1,3 +1,4 @@
-*.txt
+frankenstein.txt
+fishes.txt
 venv/
 __pycache__/
