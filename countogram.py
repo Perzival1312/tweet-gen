@@ -34,7 +34,6 @@ def make_histogram(source):
     for count, words in histogram.items():
         if len(words) == 0:
             to_remove.append(count)
-
     for index in to_remove:
         histogram.pop(index)
     return histogram

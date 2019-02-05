@@ -5,6 +5,8 @@ f = open(str(sys.argv[1:][0]), 'r')
 word_list = f.readlines()
 f.close()
 
+
+
 histogram = {}
 words_list = []
 table = str.maketrans({key: None for key in string.punctuation})
@@ -37,5 +39,6 @@ def frequency(word, histogram):
         return("word is not in source text")
 
 histogram = make_histogram(words_list)
+print(histogram)
 unique_words(histogram)
 frequency('the', histogram)
