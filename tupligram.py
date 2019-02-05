@@ -17,11 +17,14 @@ for word in range(len(words_list)):
 def make_histogram(source):
     histogram = []
     for words in source:
-        count = 0
-        for checking in source:
-            if words == checking:
-                count += 1
+        count = source.count(words)
+        # equalivent to
+        # count = 0
+        # for checking in source:
+        #     if words == checking:
+        #         count += 1
         histogram.append((words, count))
     return list(set(histogram))
 
 histogram = make_histogram(words_list)
+print(histogram)
