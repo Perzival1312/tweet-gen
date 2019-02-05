@@ -29,4 +29,22 @@ def make_histogram(source):
                 histogram.append([source[j], 1])
     return histogram
 
-histogram = make_histogram(words_list)
+# histogram = make_histogram(words_list)
+
+
+
+
+def make_histogram_2(source):
+    histogram = []
+    for j in range(0, len(source)):
+        if source[j] not in histogram:
+            histogram.append(source[j])
+            histogram.append(1)
+        else:
+            histogram[histogram.index(source[j])+1] += 1
+    return histogram
+
+histogram = make_histogram_2(words_list)
+print(histogram)
+print(type(histogram))
+print(type(histogram[1]))
