@@ -12,3 +12,4 @@ virtualenv
 Werkzeug
 wheel
 whitenoise
+gunicorn
