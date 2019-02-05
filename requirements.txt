@@ -1,3 +1,14 @@
-django
-gunicorn
-django-heroku
+Click
+dj-database-url
+Flask
+itsdangerous
+Jinja2
+MarkupSafe
+pip
+psycopg2
+pytz
+setuptools
+virtualenv
+Werkzeug
+wheel
+whitenoise
