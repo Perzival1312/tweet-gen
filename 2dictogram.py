@@ -10,10 +10,13 @@ f = open(str(sys.argv[1:2][0]), 'r')
 texts_list = f.readlines()
 f.close()
 
-for text in texts_list:
-    g = open(text.strip(), 'r')
-    word_list += g.readlines()
-    g.close()
+try:
+    for text in texts_list:
+        g = open(text.strip(), 'r')
+        word_list += g.readlines()
+        g.close()
+except:
+    word_list = texts_list
 
 histogram = {}
 words_list = []
@@ -45,12 +48,11 @@ for ind, word in enumerate(words_list):
             pass
 
 times = int(sys.argv[3:4][0])
-total = 0 #sum(histogram.values())
+total = 0 
 sampling = {}
 
 for l in histogram.values():
     total += l[0]
-# print(total)
 
 # changes frquency to range of probability of picking key
 prev_val = 0
@@ -61,7 +63,6 @@ for key, value in histogram.items():
     for key_next, value_next in value[1].items():
         value[1][key_next] = value_next/value[2]+prev_next_val
         prev_next_val = value[1][key_next]
-# print(histogram)
 
 '''
     its going to take a word as third arg which will be the first word in the sentence
@@ -76,7 +77,7 @@ for key, value in histogram.items():
 
 random_sent = [str(sys.argv[2:3][0])]
 
-# # gets a random word based on frequency range
+# gets a random word based on frequency range
 def sample():
     prev_word = random_sent[len(random_sent)-1]
     chance = random.random()
@@ -90,10 +91,5 @@ def sample():
 
 for _ in range(times):
     random_sent.append(sample())
-    # if word in sampling:
-    #     sampling[word] += 1
-    # else:
-    #     sampling[word] = 1
+
 print(" ".join(random_sent))
-# print(histogram)
-# print(sampling)
