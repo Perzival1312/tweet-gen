@@ -1,4 +1,12 @@
 frankenstein.txt
 fishes.txt
+varney.txt
+warandpeace.txt
+kjvbible.txt
+texts.txt
+# !requirements.txt
+# *.txt
+# !runtime.txt
 venv/
 __pycache__/
+# ^(?!(requirements.txt|runtime.txt)$).*$
