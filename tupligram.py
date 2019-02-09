@@ -1,8 +1,7 @@
 import sys, string
 string.punctuation += "”“’‘—"
 
-# f = open(str(sys.argv[1:][0]), 'r')
-f = open('fishes.txt', 'r')
+f = open(str(sys.argv[1:][0]), 'r')
 word_list = f.readlines()
 f.close()
 
@@ -33,15 +32,22 @@ def make_histogram_2(source):
         for wtuple in histogram:
             if wtuple[0] == word:
                 old = wtuple[1][0]
-                # print(wtuple[1][0])# += 1
                 wtuple[1][:] = [1+old]
                 break
-            # else:
-            #     histogram.append((word, [1]))
-            # break
         else:
             histogram.append((word, [1]))
     return histogram
 
-histogram = make_histogram_2(words_list)
+def make_histogram_3(source):
+    for word in source:
+        for wtuple in histogram:
+            if wtuple[0] == word:
+                histogram.append((word, wtuple[1]+1))
+                histogram.remove(wtuple)
+                break
+        else:
+            histogram.append((word, 1))
+    return histogram
+
+histogram = make_histogram_3(words_list)
 print(histogram)
