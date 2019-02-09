@@ -31,13 +31,16 @@ def make_histogram_2(source):
     histogram = [('test', [0])]
     for word in source:
         for wtuple in histogram:
-            if wtuple[0] == words_list:
-                print(wtuple[1][:])# += 1
-                wtuple[1][:] += 1
-            else:
-                histogram.append((word, [1]))
-        # else:
-        #     histogram.append((word, [1]))
+            if wtuple[0] == word:
+                old = wtuple[1][0]
+                # print(wtuple[1][0])# += 1
+                wtuple[1][:] = [1+old]
+                break
+            # else:
+            #     histogram.append((word, [1]))
+            # break
+        else:
+            histogram.append((word, [1]))
     return histogram
 
 histogram = make_histogram_2(words_list)
