@@ -10,4 +10,3 @@ texts.txt
 venv/
 __pycache__/
 # ^(?!(requirements.txt|runtime.txt)$).*$
-.gitignore
