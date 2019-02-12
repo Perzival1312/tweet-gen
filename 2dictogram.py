@@ -1,3 +1,4 @@
+# {word: count}
 # {word: [count, {next words}]}
 # {word: [count, {words: count, words: count, words: count}], total}
 # {word: [count, {words: [count, {word: count}, total]}, total]}
@@ -16,6 +17,7 @@ try:
         word_list += g.readlines()
         g.close()
 except:
+    print(text)
     word_list = texts_list
 
 histogram = {}
@@ -26,6 +28,7 @@ for strings in word_list:
     words_list += strings.split()
 for word in range(len(words_list)):
     words_list[word] = words_list[word].translate(table).lower()
+print(len(words_list))
 
 for ind, word in enumerate(words_list):
     if word in histogram:
