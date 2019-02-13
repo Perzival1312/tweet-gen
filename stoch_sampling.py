@@ -20,7 +20,11 @@ for words in words_list:
     else:
         histogram[words] = 1
 
-times = int(sys.argv[2:3][0])
+try:
+    times = int(sys.argv[2:3][0])
+except IndexError:
+    times = 1000
+
 total = sum(histogram.values())
 sampling = {}
 
