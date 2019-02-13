@@ -50,7 +50,11 @@ for ind, word in enumerate(words_list):
         except:
             pass
 
-times = int(sys.argv[3:4][0])
+try:
+    times = int(sys.argv[3:4][0])
+except IndexError:
+    times = 25
+
 total = 0 
 sampling = {}
 
@@ -75,10 +79,12 @@ for key, value in histogram.items():
             that word is in first layer
                 then get random from that words inset dict
     TODO:
-        possibly make a third lvl of dicts
+        possibly make a third lvl of dicts or with word pairs as the keys
 '''
-
-random_sent = [str(sys.argv[2:3][0])]
+try:
+    random_sent = [str(sys.argv[2:3][0])]
+except IndexError:
+    random_sent = ["the"]
 
 # gets a random word based on frequency range
 def sample():

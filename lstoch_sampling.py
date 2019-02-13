@@ -26,7 +26,11 @@ for j in range(len(words_list)):
         if not contains:
             histogram.append([words_list[j], 1])
 
-times = int(sys.argv[2:3][0])
+try:
+    times = int(sys.argv[2:3][0])
+except IndexError:
+    times = 1000
+
 total = 0
 sampling = []
 
