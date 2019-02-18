@@ -18,17 +18,17 @@ class LinkedList(object):
         if items is not None:
             for ind, item in enumerate(items):
                 new_node = Node(item)
-                try:
+                if ind-1>=0:
                     prev_node = Node(items[ind-1])
                     new_node.prev = prev_node
-                except:
-                    pass
+                else:
+                    new_node.prev = None
                 try:
                     next_node = Node(items[ind+1])
                     new_node.next = next_node  
                 except:
                     pass                 
-                self.append(item)
+                self.append(new_node)
                 if self.head is None:
                     self.head = new_node
             self.tail = new_node      
@@ -79,16 +79,13 @@ class LinkedList(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
-        new_node = Node(item)
-        # if self.tail is not None:
-        #     self.tail.next = new_node
-        # if self.head is None:
-        #     self.head = new_node
-        # self.tail = new_node
+        if type(item) != Node:
+            new_node = Node(item)
+        else:
+            new_node = item
         if self.tail is not None:
-            temp_node = self.tail
-            temp_node.prev = self.tail
-            temp_node.next = new_node
+            new_node.prev = self.tail
+            self.tail.next = new_node
         if self.head is None:
             self.head = new_node
         self.tail = new_node
@@ -100,12 +97,10 @@ class LinkedList(object):
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
-        new_node = Node(item)
-        # if self.head is not None:
-        #     new_node.next = self.head
-        # else:
-        #     self.tail = new_node
-        # self.head = new_node
+        if type(item) != Node:
+            new_node = Node(item)
+        else:
+            new_node = item
         if self.head is not None:
             temp_node = self.head
             temp_node.prev = new_node
@@ -139,11 +134,10 @@ class LinkedList(object):
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
         node = self.head
-        # prev_node = None
         try:
             prev_node = node.prev
         except:
-            pass
+            prev_node = None
         while node is not None:
             if node.data == item:
                 try:
@@ -176,7 +170,7 @@ def test_linked_list():
     print('\nTesting append:')
     for item in ['D', 'E', 'F']:
         print('append({!r})'.format(item))
-        ll.prepend(item)
+        ll.append(item)
         print('list: {}'.format(ll))
 
     print('head: {}'.format(ll.head))
