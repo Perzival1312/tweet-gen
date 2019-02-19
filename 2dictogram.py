@@ -3,32 +3,11 @@
 # {word: [count, {words: count, words: count, words: count}], total}
 # {word: [count, {words: [count, {word: count}, total]}, total]}
 
-import sys, string, random
-string.punctuation += "”“’‘—"
-string.punctuation += string.digits
-word_list = []
-f = open(str(sys.argv[1:2][0]), 'r')
-texts_list = f.readlines()
-f.close()
-
-try:
-    for text in texts_list:
-        g = open(text.strip(), 'r')
-        word_list += g.readlines()
-        g.close()
-except:
-    print(text)
-    word_list = texts_list
-
+import sys, string, random, utility
+source = str(sys.argv[1:2][0])
+words_list = utility.read(source)
+words_list = utility.cleanse(words_list)
 histogram = {}
-words_list = []
-table = str.maketrans({key: None for key in string.punctuation})
-
-for strings in word_list:
-    words_list += strings.split()
-for word in range(len(words_list)):
-    words_list[word] = words_list[word].translate(table).lower()
-print(len(words_list))
 
 for ind, word in enumerate(words_list):
     if word in histogram:

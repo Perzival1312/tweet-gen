@@ -1,17 +1,12 @@
 from __future__ import division, print_function  # Python 2 and 3 compatibility
-import sys, string
+import sys, string, utility
 
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
 
     def __init__(self, source=None):
-        words_list = []
-        table = str.maketrans({key: None for key in string.punctuation})
-        for strings in source:
-            words_list += strings.split()
-        for word in range(len(words_list)):
-            words_list[word] = words_list[word].translate(table).lower()
+        words_list = utility.cleanse(source)
         """Initialize this histogram as a new dict and count given words."""
         super(Dictogram, self).__init__()  # Initialize this as a new dict
         # Add properties to track useful word counts for this histogram
@@ -32,8 +27,6 @@ class Dictogram(dict):
             self.types += 1
         self.tokens += count
 
-
-
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
@@ -41,7 +34,6 @@ class Dictogram(dict):
             return self[word]
         else:
             return 0
-
 
 def print_histogram(word_list):
     print('word list: {}'.format(word_list))
