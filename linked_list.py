@@ -161,6 +161,16 @@ class LinkedList(object):
             node = node.next
         else:
             raise ValueError('Item not found: {}'.format(item))
+    
+    def replace(self, old, new):
+        node = self.head
+        while node is not None:
+            if node.data == old:
+                node.data = new
+                break
+            node = node.next
+        else:
+            raise ValueError('Item not found: {}'.format(old))
 
 
 def test_linked_list():
@@ -189,6 +199,9 @@ def test_linked_list():
         print('head: {}'.format(ll.head))
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
+
+    ll.replace('D', 'G')
+    print(ll)
 
 
 if __name__ == '__main__':
