@@ -1,19 +1,10 @@
 from dictogram_official import Dictogram
-import sys
+import sys, utility
 
 word_list = []
-f = open(str(sys.argv[1:2][0]), 'r')
-texts_list = f.readlines()
-f.close()
-
-try:
-    for text in texts_list:
-        g = open(text.strip(), 'r')
-        word_list += g.readlines()
-        g.close()
-except:
-    print(text)
-    word_list = texts_list
+source = str(sys.argv[1:2][0])
+word_list = utility.read(source)
+word_list = utility.cleanse(word_list)
 
 histogram = Dictogram(word_list)
 print(histogram['the'])

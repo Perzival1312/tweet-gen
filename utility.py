@@ -13,14 +13,13 @@ def cleanse(text):
     return words_list
 
 def read(source):
-    texts_list = []
+    texts_list, word_list = [], []
     f = open(source, 'r')
     texts_list = f.readlines()
     f.close()
     try:
         for text in texts_list:
-            text = text.strip()
-            g = open(text, 'r')
+            g = open(text.strip(), 'r')
             word_list += g.readlines()
             g.close()
     except:
