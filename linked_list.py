@@ -17,20 +17,14 @@ class LListIter(object):
         node = self.item
         if node == None:
             raise StopIteration
-        if self.item.prev is None:
-            pass
-        else:
-            self.item = self.item.next
-        return self.item
+        self.item = self.item.next
+        return node
             
-
-
 class LinkedList(object):
     def __init__(self, items=None):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
-        # self.current = None
         # Append given items
         if items is not None:
             for ind, item in enumerate(items):
@@ -49,7 +43,6 @@ class LinkedList(object):
                 if self.head is None:
                     self.head = new_node
             self.tail = new_node   
-            # self.current = Current(self.head)   
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -61,8 +54,6 @@ class LinkedList(object):
         return 'LinkedList({!r})'.format(self.items())
     
     def __iter__(self):
-        # current = LListIter(self.head)
-        # self.current = self.head
         return LListIter(self.head)
 
     def items(self):
