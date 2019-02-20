@@ -2,15 +2,16 @@ from linked_list import LinkedList
 
 class HashIter(object):
     def __init__(self, item):
-        self.item = item    
+        self.item = item  
+        self.n = 0  
 
     def __next__(self):
-        bucket = self.item
-        for pair in bucket:
-            return pair
-        # if node == None:
-        #     raise StopIteration
-        # return self.item
+        try:
+            bucket = self.item[self.n]
+        except:
+            raise StopIteration
+        self.n += 1
+        return bucket
 
 class HashTable(object):
     def __init__(self, init_size=8):
@@ -29,8 +30,8 @@ class HashTable(object):
         return 'HashTable({!r})'.format(self.items())
 
     def __iter__(self):
-        for bucket in self.buckets:
-            return (HashIter(bucket))
+        # for bucket in self.buckets:
+        return HashIter(self.buckets)
 
     def __getitem__(self, key):
         if self.contains(key):
@@ -141,7 +142,7 @@ class HashTable(object):
 
 
 def test_hash_table():
-    ht = HashTable(2)
+    ht = HashTable(3)
     print('hash table: {}'.format(ht))
 
     print('\nTesting set:')
@@ -160,7 +161,7 @@ def test_hash_table():
     print(ht['X'])
 
     # Enable this after implementing delete method
-    delete_implemented = True
+    delete_implemented = False
     if delete_implemented:
         print('\nTesting delete:')
         for key in ['I', 'V', 'X']:
@@ -170,8 +171,9 @@ def test_hash_table():
 
         print('contains(X): {}'.format(ht.contains('X')))
         print('length: {}'.format(ht.length()))
-    # for thing in ht:
-    #     print(thing)
+    for thing in ht:
+        for things in ht:
+            print(thing, things)
 
 
 if __name__ == '__main__':
