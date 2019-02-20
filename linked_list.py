@@ -9,12 +9,28 @@ class Node(object):
         """Return a string representation of this node."""
         return 'Node({!r})'.format(self.data)
 
+class LListIter(object):
+    def __init__(self, item):
+        self.item = item    
+
+    def __next__(self):
+        node = self.item
+        if node == None:
+            raise StopIteration
+        if self.item.prev is None:
+            pass
+        else:
+            self.item = self.item.next
+        return self.item
+            
+
+
 class LinkedList(object):
     def __init__(self, items=None):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
-        self.current = None
+        # self.current = None
         # Append given items
         if items is not None:
             for ind, item in enumerate(items):
@@ -33,7 +49,7 @@ class LinkedList(object):
                 if self.head is None:
                     self.head = new_node
             self.tail = new_node   
-            self.current = self.head   
+            # self.current = Current(self.head)   
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -45,14 +61,9 @@ class LinkedList(object):
         return 'LinkedList({!r})'.format(self.items())
     
     def __iter__(self):
-        self.current = self.head
-        return self
-    def __next__(self):
-        node = self.current
-        if node == None:
-            raise StopIteration
-        self.current = self.current.next
-        return node.data
+        # current = LListIter(self.head)
+        # self.current = self.head
+        return LListIter(self.head)
 
     def items(self):
         """Return a list (dynamic array) of all items in this linked list.
@@ -133,7 +144,7 @@ class LinkedList(object):
         node = self.head # gets first element in linked list
         while node is not None: # checks to see if it is a node
             if quality(node.data): # runs quality func which chacks if node data is equal to func input
-                return node#.data # if true returning nodes data
+                return node.data # if true returning nodes data
             node = node.next # next node
         return None # default if not found
 
@@ -214,10 +225,10 @@ def test_linked_list():
 
     ll.replace('D', 'G')
     for items in ll:
-        print(items)
-    for items in ll:
-        print(items)
-    print(ll)
+        for item in ll:
+            print(item, items)
+        # print(item)
+    # print(ll)
 
 
 if __name__ == '__main__':
