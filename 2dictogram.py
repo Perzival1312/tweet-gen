@@ -32,7 +32,7 @@ for ind, word in enumerate(words_list):
 try:
     times = int(sys.argv[3:4][0])
 except IndexError:
-    times = 25
+    times = 200
 
 total = 0 
 sampling = {}
@@ -63,7 +63,7 @@ for key, value in histogram.items():
 try:
     random_sent = [str(sys.argv[2:3][0])]
 except IndexError:
-    random_sent = ["the"]
+    random_sent = ["START"]
 
 # gets a random word based on frequency range
 def sample():
@@ -78,6 +78,10 @@ def sample():
     return choice
 
 for _ in range(times):
-    random_sent.append(sample())
+    next = sample()
+    if next == "STOP":
+        break
+    if next != "START":
+        random_sent.append(sample())
 
-print(" ".join(random_sent))
+print(" ".join(random_sent[1:]))
