@@ -6,7 +6,7 @@ class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
 
     def __init__(self, source=None):
-        words_list = utility.cleanse(source)
+        words_list = source
         """Initialize this histogram as a new dict and count given words."""
         super(Dictogram, self).__init__()  # Initialize this as a new dict
         # Add properties to track useful word counts for this histogram
@@ -78,6 +78,7 @@ class Dictogram(dict):
     def get_sentence(self):
         next = ""
         while next != "STOP":
+            # print(next)
             next = self.sample()
             if next != "START":
                 self.random_sent.append(next)
@@ -85,17 +86,6 @@ class Dictogram(dict):
     def print_sentence(self):
         # print(" ".join(self.random_sent[1:len(self.random_sent)-1]))
         return " ".join(self.random_sent[1:len(self.random_sent)-1])
-
-def print_histogram(word_list):
-    print('word list: {}'.format(word_list))
-    # Create a dictogram and display its contents
-    histogram = Dictogram(word_list)
-    print('dictogram: {}'.format(histogram))
-    print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
-    for word in word_list[-2:]:
-        freq = histogram.frequency(word)
-        print('{!r} occurs {} times'.format(word, freq))
-    print()
 
 
 def main():
@@ -108,20 +98,6 @@ def main():
         histogram.count_to_possibility()
         histogram.get_sentence()
         print(histogram.print_sentence())
-        # Test histogram on given arguments
-        # print_histogram(arguments)
-    else:
-        # Test histogram on letters in a word
-        word = 'abracadabra'
-        print_histogram(list(word))
-        # Test histogram on words in a classic book title
-        fish_text = 'one fish two fish red fish blue fish'
-        print_histogram(fish_text.split())
-        # Test histogram on words in a long repetitive sentence
-        woodchuck_text = ('how much wood would a wood chuck chuck'
-                          ' if a wood chuck could chuck wood')
-        print_histogram(woodchuck_text.split())
-
 
 if __name__ == '__main__':
     main()

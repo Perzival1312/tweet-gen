@@ -2,28 +2,52 @@ from flask import (Flask, render_template, redirect, url_for, make_response, fla
 app = Flask(__name__)
 from dictogram_official import Dictogram
 import utility
+import mongoengine
 from pymongo import MongoClient 
-from mongoengine import *
+from mongoengine import (Document, connect, StringField)
+from flask_mongoengine import QuerySet
 
-# connect('mongoengine_test', host='localhost', port=27017)
-
-client = MongoClient('localhost', 27017)
-db = client['markov_data']
+db =connect('markov_data', host='localhost', port=27017)
 
 class sources(Document):
     title = StringField(required=True, max_length=200)
     content = StringField(required=True)
+    # meta = {'queryset_class': BaseQuerySet}
 
 class sentences(Document):
     content = StringField(required=True)
 
 @app.route('/')
 def home():
-    # words = utility.read('sources/frankenstien.txt')
-    words = "one fish two fish red fish blue fish."
+    for source in sources.objects:
+        source = source.to_mongo().to_dict()
+        if source['title'] == 'sources/frankenstein.txt\n':
+            words = source['content']
+            break
     words = utility.cleanse(words)
     histogram = Dictogram(words)
     histogram.count_to_possibility()
     histogram.get_sentence()
     sentence = histogram.print_sentence()
     return render_template('index.html', test = sentence)
+
+@app.route('/', methods=['POST'])
+def save():
+    data = request.form
+    possible_sent = sentences(content= data['sentence'])
+    print(possible_sent.content)
+    possible_sent.save()
+    return redirect('/', code=302)
+
+# @app.route('/load_sources')
+# def load_sources():
+#     texts_list, word_list = [], []
+#     f = open('texts.txt', 'r')
+#     texts_list = f.readlines()
+#     f.close()
+#     for text in texts_list:
+#         g = open(text.strip(), 'r')
+#         word_list = g.readlines()
+#         g.close()
+#         new_text = sources(title=text, content=" ".join(word_list))
+#         new_text.save()

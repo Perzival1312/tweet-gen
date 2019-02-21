@@ -9,8 +9,12 @@
 </head>
 <body>
     <h1>{{test}}</h1>
-    <button onclick=saveSent()> Save Sentence </button>
-    <button onclick="reload()"> New Sentence </button>
+    <!-- <button onclick="location.href = '/save'"> Save Sentence </button> -->
+    <form action="/" method="post" id="saveSent">
+        val: <input type="text" name="sentence" value="{{test}}" hidden=true>
+    </form>
+    <button type="submit" value="Submit" class="btn-link" form="saveSent"> Save Sentence </button>
+    <button onclick="location.reload()"> New Sentence </button>
 
     <script src="../static/scripts.js"></script>
 </body>
