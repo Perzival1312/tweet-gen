@@ -30,7 +30,6 @@ class HashTable(object):
         return 'HashTable({!r})'.format(self.items())
 
     def __iter__(self):
-        # for bucket in self.buckets:
         return HashIter(self.buckets)
 
     def __getitem__(self, key):
@@ -101,7 +100,6 @@ class HashTable(object):
         # TODO: If found, return value associated with given key
         # TODO: Otherwise, raise error to tell user get failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
-        # return 0
         bucket = self.buckets[self._bucket_index(key)]
         val = bucket.find(lambda item : item[0] == key)
         if val is not None:
@@ -173,7 +171,7 @@ def test_hash_table():
         print('length: {}'.format(ht.length()))
     for thing in ht:
         for things in ht:
-            print(thing, things)
+            print(thing, " + ", things)
 
 
 if __name__ == '__main__':
