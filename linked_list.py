@@ -55,6 +55,12 @@ class LinkedList(object):
     
     def __iter__(self):
         return LListIter(self.head)
+    
+    def __getitem__(self, ind):
+        node = self.head
+        for _ in range(ind-1):
+            node = node.next
+        return node
 
     def items(self):
         """Return a list (dynamic array) of all items in this linked list.
@@ -215,9 +221,10 @@ def test_linked_list():
         print('length: {}'.format(ll.length()))
 
     ll.replace('D', 'G')
-    for items in ll:
-        for item in ll:
-            print(item, items)
+    # for items in ll:
+    #     for item in ll:
+    #         print(item, items)
+    print(ll[6])
         # print(item)
     # print(ll)
 
