@@ -3,16 +3,22 @@ app = Flask(__name__)
 from dictogram_official import Dictogram
 import utility
 import mongoengine
+import os, dotenv
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 
 db =connect('markov_data', host='localhost', port=27017)
 
+client = MongoClient(os.getenv("URI"),
+                     connectTimeoutMS=30000,
+                     socketTimeoutMS=None,
+                     socketKeepAlive=True)
+db = client.get_default_database()
+
 class sources(Document):
     title = StringField(required=True, max_length=200)
     content = StringField(required=True)
-    # meta = {'queryset_class': BaseQuerySet}
 
 class sentences(Document):
     content = StringField(required=True)
