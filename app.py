@@ -11,7 +11,7 @@ from flask_mongoengine import QuerySet
 db = connect('markov_data', host='localhost', port=27017)
 
 client = MongoClient(os.getenv("URI"),
-                     connectTimeoutMS=30000,
+                     connectTimeoutMS=300000,
                      socketTimeoutMS=None,
                      socketKeepAlive=True)
 # db = client.get_default_database()
