@@ -8,12 +8,12 @@ from pymongo import MongoClient
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 
-db = connect('markov_data', host='localhost', port=27017)
+db = connect('markov_data', port=27017, host=os.getenv("URI"))
 
-client = MongoClient(os.getenv("URI"),
-                     connectTimeoutMS=300000,
-                     socketTimeoutMS=None,
-                     socketKeepAlive=True)
+# client = MongoClient(os.getenv("URI"),
+#                      connectTimeoutMS=300000,
+#                      socketTimeoutMS=None,
+#                      socketKeepAlive=True)
 # db = client.get_default_database()
 
 class sources(Document):
