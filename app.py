@@ -10,7 +10,7 @@ from pymongo import MongoClient
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 try:
-    db = connect('markov_data', host='localhost:27017')
+    db = connect('markov_data', host='mongodb://heroku_v2s9b483:ou678psipceiq0dr9vlnilreos@ds351455.mlab.com:51455/heroku_v2s9b483')
 except:
     app.config['MONGODB_SETTINGS'] = {'db': 'markov_data', 'host': 'mongodb://heroku_v2s9b483:ou678psipceiq0dr9vlnilreos@ds351455.mlab.com:51455/heroku_v2s9b483'}
     # db = connect('markov_data')
