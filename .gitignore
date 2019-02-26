@@ -4,4 +4,4 @@ venv/
 __pycache__/
 .DS_Store
 .pytest_cache/
-.env
+config_module.py

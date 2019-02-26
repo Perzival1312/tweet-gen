@@ -4,13 +4,15 @@ from dictogram_official import Dictogram
 import utility
 import mongoengine
 import os, dotenv
+# URI = app.config.from_envvar()
+app.config.from_object('config_module.ProductionConfig')
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 try:
     db = connect('markov_data', host='localhost:27017')
 except:
-    db = connect(os.getenv("URI"))
+    db = connect('markov_data')
 
 # client = MongoClient(os.getenv("URI"),
 #                     #  'markov_data',
