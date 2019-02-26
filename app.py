@@ -63,4 +63,5 @@ def save():
 #         word_list = g.readlines()
 #         g.close()
 #         new_text = sources(title=text, content=" ".join(word_list))
-#         new_text.save()
+#         new_text.save() 
+#         return redirect('/', code=302)
