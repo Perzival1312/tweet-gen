@@ -78,12 +78,14 @@ class LinkedList(object):
         return items  # O(1) time to return list
 
     def is_empty(self):
+        # O(1)
         """Return a boolean indicating whether this linked list is empty."""
         return self.head is None
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(n) Why and under what conditions?
+                searching through all nodes"""
         # TODO: Loop through all nodes and count one for each
         # node = self.head
         # count = 0
@@ -96,7 +98,8 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(1) Why and under what conditions?
+                just changes some values"""
         # TODO: Create new node to hold given item
         # TODO: Append node after tail, if it exists
         if type(item) != Node:
@@ -114,7 +117,8 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        TODO: Running time: O(1) Why and under what conditions?
+                just changes some values"""
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
         if type(item) != Node:
@@ -147,8 +151,10 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        TODO: Best case running time: O(1) Why and under what conditions?
+                item is head therefore only chcking once
+        TODO: Worst case running time: O(n) Why and under what conditions?
+                item is tail chcking entire ll"""
         # TODO: Loop through all nodes to find one whose data matches given item
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
