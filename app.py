@@ -52,6 +52,7 @@ def save():
     possible_sent.save()
     return redirect('/', code=302)
 
+<<<<<<< HEAD
 # @app.route('/load_sources')
 # def load_sources():
 #     texts_list, word_list = [], []
@@ -65,3 +66,17 @@ def save():
 #         new_text = sources(title=text, content=" ".join(word_list))
 #         new_text.save()
 #     return redirect('/', code=302)
+=======
+@app.route('/load_sources')
+def load_sources():
+    texts_list, word_list = [], []
+    f = open('texts.txt', 'r')
+    texts_list = f.readlines()
+    f.close()
+    for text in texts_list:
+        g = open(text.strip(), 'r')
+        word_list = g.readlines()
+        g.close()
+        new_text = sources(title=text, content=" ".join(word_list))
+        new_text.save()
+>>>>>>> 9b459408f16b5267d790b69a43ba236fdf7e4c34
