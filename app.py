@@ -52,15 +52,16 @@ def save():
     possible_sent.save()
     return redirect('/', code=302)
 
-@app.route('/load_sources')
-def load_sources():
-    texts_list, word_list = [], []
-    f = open('texts.txt', 'r')
-    texts_list = f.readlines()
-    f.close()
-    for text in texts_list:
-        g = open(text.strip(), 'r')
-        word_list = g.readlines()
-        g.close()
-        new_text = sources(title=text, content=" ".join(word_list))
-        new_text.save()
+# @app.route('/load_sources')
+# def load_sources():
+#     texts_list, word_list = [], []
+#     f = open('texts.txt', 'r')
+#     texts_list = f.readlines()
+#     f.close()
+#     for text in texts_list:
+#         g = open(text.strip(), 'r')
+#         word_list = g.readlines()
+#         g.close()
+#         new_text = sources(title=text, content=" ".join(word_list))
+#         new_text.save()
+#         return redirect('/', code=302)
