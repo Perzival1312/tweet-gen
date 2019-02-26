@@ -25,6 +25,7 @@ class LinkedList(object):
         """Initialize this linked list and append the given items, if any."""
         self.head = None  # First node
         self.tail = None  # Last node
+        self.size = 0
         # Append given items
         if items is not None:
             for ind, item in enumerate(items):
@@ -87,13 +88,7 @@ class LinkedList(object):
         TODO: Running time: O(n) Why and under what conditions?
                 searching through all nodes"""
         # TODO: Loop through all nodes and count one for each
-        # node = self.head
-        # count = 0
-        # while node is not None:
-        #     count += 1
-        #     node = node.next
-        # return count
-        return len(self.items())
+        return self.size
 
 
     def append(self, item):
@@ -112,6 +107,7 @@ class LinkedList(object):
         if self.head is None:
             self.head = new_node
         self.tail = new_node
+        self.size += 1
         
 
 
@@ -132,6 +128,7 @@ class LinkedList(object):
         else:
             self.tail = new_node
         self.head = new_node
+        self.size += 1
 
 
     def find(self, quality):
@@ -182,6 +179,7 @@ class LinkedList(object):
                 except:
                     pass
                 node.next = None
+                self.size -= 1
                 break
             prev_node = node
             node = node.next
