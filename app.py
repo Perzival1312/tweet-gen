@@ -27,7 +27,7 @@ class sentences(Document):
 def home():
     for source in sources.objects:
         source = source.to_mongo().to_dict()
-        if source['title'] == 'sources/frankenstein.txt\n':
+        if source['title'] == 'sources/modestproposal.txt\n':
             words = source['content']
             break
     words = utility.cleanse(words)
