@@ -3,25 +3,12 @@ app = Flask(__name__)
 from dictogram_official import Dictogram
 import utility
 import mongoengine
-# import os, dotenv
-# URI = app.config.from_envvar()
-# app.config.from_object('config_module.ProductionConfig')
+import config_module
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
-# try:
-# connect('markov_data', host='localhost:27017')
-# except:
-connect('markov_data', host='mongodb://heroku_v2s9b483:ou678psipceiq0dr9vlnilreos@ds351455.mlab.com:51455/heroku_v2s9b483')
-    # app.config['MONGODB_SETTINGS'] = {'db': 'markov_data', 'host': 'mongodb://heroku_v2s9b483:ou678psipceiq0dr9vlnilreos@ds351455.mlab.com:51455/heroku_v2s9b483'}
-    # db = connect('markov_data')
 
-# client = MongoClient(os.getenv("URI"),
-#                     #  'markov_data',
-#                      connectTimeoutMS=300000,
-#                      socketTimeoutMS=None,
-#                     socketKeepAlive=True)
-# db = client['markov_data']
+connect('markov_data', host=config_module.Config.DATABASE_URI)
 
 class sources(Document):
     title = StringField(required=True, max_length=200)
@@ -34,7 +21,7 @@ class sentences(Document):
 def home():
     for source in sources.objects:
         source = source.to_mongo().to_dict()
-        if source['title'] == 'sources/modestproposal.txt\n':
+        if source['title'] == 'sources/baskerville.txt\n':
             words = source['content']
             break
     words = utility.cleanse(words)
