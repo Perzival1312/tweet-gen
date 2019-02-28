@@ -1,14 +1,18 @@
 from flask import (Flask, render_template, redirect, url_for, make_response, flash, request)
-app = Flask(__name__)
-from dictogram_official import Dictogram
-import utility
 import mongoengine
-import config_module
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
+import utility
+from dictogram_official import Dictogram
+import config_module
 
-connect('markov_data', host=config_module.Config.DATABASE_URI)
+app = Flask(__name__)
+# from boto.s3.connection import S3Connection
+# s3 = S3Connection(os.environ['MONGODB_URI'])
+
+
+connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
 
 class sources(Document):
     title = StringField(required=True, max_length=200)
@@ -21,7 +25,7 @@ class sentences(Document):
 def home():
     for source in sources.objects:
         source = source.to_mongo().to_dict()
-        if source['title'] == 'sources/baskerville.txt\n':
+        if source['title'] == 'sources/grimmtales.txt\n':
             words = source['content']
             break
     words = utility.cleanse(words)
