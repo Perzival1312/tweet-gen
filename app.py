@@ -8,11 +8,8 @@ from dictogram_official import Dictogram
 import config_module
 
 app = Flask(__name__)
-# from boto.s3.connection import S3Connection
-# s3 = S3Connection(os.environ['MONGODB_URI'])
 
-
-connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
+connect('markov_data', host=config_module.DevelopmentConfig.DATABASE_URI)
 
 class sources(Document):
     title = StringField(required=True, max_length=200)
