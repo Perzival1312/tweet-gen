@@ -3,14 +3,20 @@ import mongoengine
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
-import utility
+import utility, os
 from dictogram_official import Dictogram
 # import 2nd_order_markov
 import config_module
 
 app = Flask(__name__)
 
-connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
+if(os.environ['SETTINGS'] == 'DevelopmentConfig'):
+    connect('markov_data', host=config_module.DevelopmentConfig.DATABASE_URI)
+elif(os.environ['SETTINGS'] == 'ProductionConfig'):
+    connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
+else:
+    connect('markov_data', host=config_module.Config.DATABASE_URI)
+    
 
 class sources(Document):
     title = StringField(required=True, max_length=200)
