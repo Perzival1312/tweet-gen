@@ -4,8 +4,7 @@ from pymongo import MongoClient
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 import utility, os
-from dictogram_official import Dictogram
-# import 2nd_order_markov
+from second_order_markov import Dictogram
 import config_module
 
 app = Flask(__name__)
