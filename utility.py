@@ -6,12 +6,15 @@ string.punctuation += string.digits
 period_str = "\nSTOP\nSTART"
 
 def cleanse(text):
+    # print("text: ", text)
     ret_list = []
+    words_list = []
     periods = str.maketrans({key: period_str for key in end_punt})
     other_punct = str.maketrans({key: None for key in string.punctuation})
     # start_stop = str.maketrans({key: period_str for key in "."})
     # print(type(text), text)
-    words_list = text.split()
+    for sentences in text:
+        words_list += sentences.split()
     # for strings in text:
     #     words_list.extend(strings)
     # print(words_list)
@@ -28,6 +31,7 @@ def cleanse(text):
     ret_list.insert(0, "START")
     ret_list.append("STOP")
     # print(ret_list)
+    # print(words_list)
     return ret_list
 
 def read(source):
@@ -41,6 +45,10 @@ def read(source):
             word_list += g.readlines()
             g.close()
     except:
-        # print(repr(text), "not a file")
+        # print(repr(text), "is not a file")
         word_list = texts_list
+    # ret_list = []
+    # for word in word_list:
+    #     ret_list.extend(word)
+    # print("source: ", word_list)
     return word_list
