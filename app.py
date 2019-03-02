@@ -5,11 +5,12 @@ from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 import utility
 from dictogram_official import Dictogram
+# import 2nd_order_markov
 import config_module
 
 app = Flask(__name__)
 
-connect('markov_data', host=config_module.DevelopmentConfig.DATABASE_URI)
+connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
 
 class sources(Document):
     title = StringField(required=True, max_length=200)
