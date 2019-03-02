@@ -13,9 +13,9 @@ def cleanse(text):
     other_punct = str.maketrans({key: None for key in string.punctuation})
     # start_stop = str.maketrans({key: period_str for key in "."})
     # print(type(text), text)
-    # words_list = text.split()
-    for sentences in text:
-        words_list += sentences.split()
+    words_list = text.split()
+    # for sentences in text:
+        # words_list += sentences.split()
     # for strings in text:
     #     words_list.extend(strings)
     # print(words_list)
