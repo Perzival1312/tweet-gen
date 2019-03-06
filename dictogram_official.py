@@ -84,8 +84,8 @@ class Dictogram(dict):
                 self.random_sent.append(next)
     
     def print_sentence(self):
-        # print(" ".join(self.random_sent[1:len(self.random_sent)-1]))
-        return " ".join(self.random_sent[1:len(self.random_sent)-1])
+        sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
+        return sentence[0].capitalize() + sentence[1:] + '.'
 
 
 def main():

@@ -9,7 +9,7 @@ import sys, string, utility, random
 
 # {START: [{word1: [count, {word2: count}, total]}, total]}
 # {word1: [{word2: [count, {word3: count}, total]}, total]}
-# {word2: [{word3: [count, {STOP: count}, total]}, total]}
+# {word2: [{word3: [count, {STOPS: count}, total]}, total]}
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
@@ -91,7 +91,8 @@ class Dictogram(dict):
             pass
     
     def print_sentence(self):
-        return " ".join(self.random_sent[1:len(self.random_sent)-1])
+        sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
+        return sentence[0].capitalize() + sentence[1:] + '.'
 
 
 def main():

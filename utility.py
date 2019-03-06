@@ -14,7 +14,10 @@ def cleanse(text):
             words_list += sentences.split()
     if(os.environ['SETTINGS'] == 'ProductionConfig'):
         words_list = text.split()
-
+    
+    for word in range(len(words_list)):
+        if words_list[word] != 'I' or words_list[word] != 'i':
+            words_list[word] = words_list[word].lower()
     for word in range(len(words_list)-1):
         words_list[word] = words_list[word].translate(periods)
     for word in range(len(words_list)):
