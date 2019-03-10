@@ -11,6 +11,7 @@
     <h1>{{test}}</h1>
     <form action="/" method="post" id="saveSent">
         val: <input type="text" name="sentence" value="{{test}}" hidden=true>
+        vai: <input type="text" name="source" value="{{sentence_source}}" hidden=true>
     </form>
     <button type="submit" value="Submit" class="btn-link" form="saveSent"> Save Sentence </button>
     <button onclick="location.reload()"> New Sentence </button>
