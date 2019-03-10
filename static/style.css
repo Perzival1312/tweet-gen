@@ -21,3 +21,12 @@ hr {
 	border: 0;
 	box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
+
+button {
+    color: lightsteelblue;
+    background-color: black;
+    border: 1;
+    border-color: lightslategray;
+    border-radius: 10px;
+    border-style: double
+}

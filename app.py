@@ -81,4 +81,4 @@ def show():
 #         g.close()
 #         new_text = sources(title=text, content=" ".join(word_list))
 #         new_text.save()
-#         return redirect('/', code=302)
+#     return redirect('/', code=302)
