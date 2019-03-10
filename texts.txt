@@ -1,7 +1,4 @@
 sources/frankenstein.txt
-sources/varney.txt
-sources/warandpeace.txt
-sources/alicewonderland.txt
 sources/modestproposal.txt
 sources/prideprejudice.txt
 sources/secretgarden.txt
@@ -11,11 +8,9 @@ sources/jekyllhyde.txt
 sources/mobydick.txt
 sources/tomsawyer.txt
 sources/scarletletter.txt
-sources/kjvbible.txt
 sources/christmascarol.txt
 sources/grimmtales.txt
 sources/leviathan.txt
-sources/montecristo.txt
 sources/treasureisland.txt
 sources/baskerville.txt
 sources/divinecomedy.txt

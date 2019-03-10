@@ -25,8 +25,8 @@ else:
 class sources(Document):
     title = StringField(required=True, max_length=200)
     content = StringField(required=True)
-    first_order = StringField(required=True)
-    second_order = StringField(required=True)
+    # first_order = StringField(required=True)
+    # second_order = StringField(required=True)
     third_order = StringField(required=True)
     fourth_order = StringField(required=True)
 
@@ -39,11 +39,8 @@ def home():
     for source in sources.objects:
         source = source.to_mongo().to_dict()
         if source['title'] == 'sources/frankenstein.txt\n':
-            words = source['content']
+            histogram = Dictogram.from_dict(json.loads(source['third_order']))
             break
-    words = utility.cleanse(words)
-    histogram = Dictogram(words, 3)
-    histogram.count_to_possibility()
     # session['chain'] = histogram
     # return redirect('/sentence', code=302)
     histogram.get_sentence()
@@ -86,16 +83,12 @@ def load_sources():
         word_list = g.readlines()
         g.close()
         words = utility.cleanse(word_list)
-        histogram_first = Dictogram(words, 1)
-        histogram_first.count_to_possibility()
-        histogram_second = Dictogram(words, 2)
-        histogram_second.count_to_possibility()
         histogram_third = Dictogram(words, 3)
         histogram_third.count_to_possibility()
         histogram_fourth = Dictogram(words, 4)
         histogram_fourth.count_to_possibility()
         new_text = sources(title=text, content=" ".join(word_list), 
-                            first_order=json.dumps(histogram_first), second_order=json.dumps(histogram_second), 
-                            third_order=json.dumps(histogram_third), fourth_order=json.dumps(histogram_fourth))
+                            third_order=json.dumps(histogram_third),
+                            fourth_order=json.dumps(histogram_fourth))
         new_text.save()
     return redirect('/', code=302)

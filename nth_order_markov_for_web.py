@@ -1,5 +1,5 @@
 from __future__ import division, print_function  # Python 2 and 3 compatibility
-import sys, string, utility, random
+import sys, string, utility, random, json
 
 # {word: count}
 # {word: [{next words}, total]}
@@ -57,6 +57,18 @@ class Dictogram(dict):
                     pass
         self.order = self.original_order
         self.create_random_seed()
+    
+    @classmethod
+    def from_dict(cls, old_dict):
+        obj = cls.__new__(cls)
+        for key, value in old_dict.items():
+            if key.startswith('START'):
+                ord = len(key.split())
+            obj[key] = value
+        obj.order = ord+1
+        obj.random_sent = ['START']
+        cls.create_random_seed(obj)
+        return obj
 
     def create_random_seed(self):
         possibilies = []
@@ -101,7 +113,6 @@ class Dictogram(dict):
             pass
     
     def print_sentence(self):
-        # print(self.random_sent)
         sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
         return sentence[0].capitalize() + sentence[1:] + '.'
 
@@ -114,8 +125,10 @@ def main():
         words = utility.cleanse(words)
         histogram = Dictogram(words, int(arguments[1])+1)
         histogram.count_to_possibility()
-        histogram.get_sentence()
-        print(histogram.print_sentence())
+        histogram = json.loads(json.dumps(histogram))
+        d = Dictogram.from_dict(histogram)
+        d.get_sentence()
+        print(d.print_sentence())
 
 if __name__ == '__main__':
     main()
