@@ -2,16 +2,22 @@ body {
     font-family: sans-serif;
     background: rgb(0, 0, 0); 
 }
+
 a, h1, h2 { 
     color: #377ba7; 
 }
+
 h1, h2 { 
     font-family: 'Georgia', serif;
     margin: 0; 
 }
-h1 { 
-    border-bottom: 2px solid #eee; 
-}
+
 h2 { 
     font-size: 1.2em; 
+}
+
+hr {
+	height: 10px;
+	border: 0;
+	box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
