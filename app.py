@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
 import utility, os
-from second_order_markov import Dictogram
+from nth_order_markov import Dictogram
 import config_module
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def home():
             words = source['content']
             break
     words = utility.cleanse(words)
-    histogram = Dictogram(words)
+    histogram = Dictogram(words, 3)
     histogram.count_to_possibility()
     histogram.get_sentence()
     sentence = histogram.print_sentence()
