@@ -1,5 +1,5 @@
-texts.txt
-sources/
+# texts.txt
+# sources/
 venv/
 __pycache__/
 .DS_Store
