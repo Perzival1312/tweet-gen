@@ -9,11 +9,13 @@ def cleanse(text):
     words_list = []
     periods = str.maketrans({key: period_str for key in end_punt})
     other_punct = str.maketrans({key: None for key in string.punctuation})
-    if(os.environ['SETTINGS'] == 'DevelopmentConfig'):
-        for sentences in text:
-            words_list += sentences.split()
-    if(os.environ['SETTINGS'] == 'ProductionConfig'):
-        words_list = text.split()
+    # if(os.environ['SETTINGS'] == 'DevelopmentConfig'):
+    #     for sentences in text:
+    #         words_list += sentences.split()
+    # if(os.environ['SETTINGS'] == 'ProductionConfig'):
+    #     words_list = text.split()
+    for sentences in text:
+        words_list += sentences.split()
     
     for word in range(len(words_list)):
         if words_list[word] != 'I' or words_list[word] != 'i':
