@@ -1,9 +1,3 @@
-sources/treasureisland.txt
-sources/baskerville.txt
-sources/divinecomedy.txt
-sources/gulliver.txt
-sources/olivertwist.txt
-sources/poev2.txt
 sources/studyscarlet.txt
 sources/timemachine.txt
 sources/tomcabin.txt
