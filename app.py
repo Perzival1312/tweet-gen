@@ -33,6 +33,8 @@ class sentences(Document):
 def reroute():
     return redirect('/sentence/frankenstein', code=302)
 
+global histogram
+
 @app.route('/', methods=['POST'])
 def save():
     data = request.form
@@ -46,11 +48,18 @@ def new_sentence(source_name):
     for source in sources.objects:
         source = source.to_mongo().to_dict()
         if source['title'] == 'sources/'+source_name+'.txt\n':
+            global histogram
             histogram = Dictogram.from_dict(json.loads(source['third_order']))
             break
-    histogram.get_sentence()
-    sentence = histogram.print_sentence()
-    return render_template('index.html', test = sentence, sentence_source = source['title'])
+    return redirect('/sentence', code=302)
+
+@app.route('/sentence')
+def show_new():
+    global histogram
+    sentence = histogram.get_sentence()
+    # sentence = histogram.print_sentence()
+    print(sentence)
+    return render_template('index.html', test = sentence)#, sentence_source = source['title'])
 
 @app.route('/saved')
 def show():

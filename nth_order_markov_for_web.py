@@ -56,7 +56,7 @@ class Dictogram(dict):
                 except IndexError:
                     pass
         self.order = self.original_order
-        self.create_random_seed()
+        # self.create_random_seed()
     
     @classmethod
     def from_dict(cls, old_dict):
@@ -101,6 +101,7 @@ class Dictogram(dict):
         return choice
 
     def get_sentence(self):
+        self.create_random_seed()
         try:
             next = ""
             while next != "STOP":
@@ -111,14 +112,15 @@ class Dictogram(dict):
             self.get_sentence()
         except RecursionError:
             pass
-    
-    def print_sentence(self):
         try:
             sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
             return sentence[0].capitalize() + sentence[1:] + '.'
         except IndexError:
             self.random_sent = ['START']
             self.get_sentence()
+    
+    def print_sentence(self):
+        pass
 
 def main():
     import sys
