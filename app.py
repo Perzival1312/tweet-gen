@@ -34,6 +34,12 @@ class sentences(Document):
     content = StringField(required=True)
     source = StringField(required=True)
 
+# app.root_path='/sentence/frankenstein'
+
+@app.route('/')
+def reroute():
+    return redirect('/sentence/frankenstein', code=302)
+
 # @app.route('/')
 # def home():
 #     for source in sources.objects:

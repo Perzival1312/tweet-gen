@@ -113,9 +113,12 @@ class Dictogram(dict):
             pass
     
     def print_sentence(self):
-        sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
-        return sentence[0].capitalize() + sentence[1:] + '.'
-
+        try:
+            sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
+            return sentence[0].capitalize() + sentence[1:] + '.'
+        except IndexError:
+            self.random_sent = ['START']
+            self.get_sentence()
 
 def main():
     import sys
