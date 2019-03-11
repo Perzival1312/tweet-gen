@@ -1,9 +1,3 @@
-sources/mobydick.txt
-sources/tomsawyer.txt
-sources/scarletletter.txt
-sources/christmascarol.txt
-sources/grimmtales.txt
-sources/leviathan.txt
 sources/treasureisland.txt
 sources/baskerville.txt
 sources/divinecomedy.txt
