@@ -93,7 +93,7 @@ def show():
 
 @app.route('/load_sources')
 def load_sources():
-    sources.drop_collection()
+    # sources.drop_collection()
     texts_list, word_list = [], []
     f = open('texts.txt', 'r')
     texts_list = f.readlines()
