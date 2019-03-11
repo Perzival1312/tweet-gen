@@ -27,17 +27,18 @@ class sentences(Document):
     content = StringField(required=True)
     source = StringField(required=True)
 
+class currentSource(Document):
+    content = StringField(required=True)
+    title = StringField(required=True)
+
 @app.route('/')
 def reroute():
     return redirect('/sentence/frankenstein', code=302)
-
-global histogram
 
 @app.route('/', methods=['POST'])
 def save():
     data = request.form
     possible_sent = sentences(content= data['sentence'], source = data['source'])
-    print(possible_sent.content, possible_sent.source)
     possible_sent.save()
     return redirect('/', code=302)
 
@@ -46,14 +47,19 @@ def new_sentence(source_name):
     for source in sources.objects:
         source = source.to_mongo().to_dict()
         if source['title'] == 'sources/'+source_name+'.txt\n':
-            global histogram
-            histogram = Dictogram.from_dict(json.loads(source['third_order']))
+            currentSource.drop_collection()
+            current_source = currentSource(source['third_order'], source['title'])
+            # global histogram
+            # histogram = Dictogram.from_dict(json.loads(source['third_order']))
+            current_source.save()
             break
     return redirect('/sentence', code=302)
 
 @app.route('/sentence')
 def show_new():
-    global histogram
+    for source in currentSource.objects:
+        histogram = Dictogram.from_dict(json.loads(source['content']))
+        break
     sentence = histogram.get_sentence()
     print(sentence)
     return render_template('index.html', test = sentence)#, sentence_source = source['title'])
