@@ -1,23 +1,12 @@
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import sys, string, utility, random, json
 
-# {word: count}
-# {word: [{next words}, total]}
-# {word: [{words: count}], total}
-# {word: [{words: [count, {word: count}, total]}, total]}
-
-
-# {START: [{word1: [count, {word2: count}, total]}, total]}
-# {word1: [{word2: [count, {word3: count}, total]}, total]}
-# {word2: [{word3: [count, {STOPS: count}, total]}, total]}
-
 # {(START, word1) : [word2, count]}
 # {(word1, word2) : [word3, count]}
 # {(word2, word3) : STOPS}
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
-
     def __init__(self, source=None, order=2):
         words_list = source
         """Initialize this histogram as a new dict and count given words."""
@@ -56,7 +45,6 @@ class Dictogram(dict):
                 except IndexError:
                     pass
         self.order = self.original_order
-        # self.create_random_seed()
     
     @classmethod
     def from_dict(cls, old_dict):
@@ -118,22 +106,3 @@ class Dictogram(dict):
         except IndexError:
             self.random_sent = ['START']
             self.get_sentence()
-    
-    def print_sentence(self):
-        pass
-
-def main():
-    import sys
-    arguments = sys.argv[1:]  # Exclude script name in first argument
-    if len(arguments) == 2:
-        words = utility.read(arguments[0])
-        words = utility.cleanse(words)
-        histogram = Dictogram(words, int(arguments[1])+1)
-        histogram.count_to_possibility()
-        histogram = json.loads(json.dumps(histogram))
-        d = Dictogram.from_dict(histogram)
-        d.get_sentence()
-        print(d.print_sentence())
-
-if __name__ == '__main__':
-    main()

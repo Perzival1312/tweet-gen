@@ -9,8 +9,6 @@ from nth_order_markov_for_web import Dictogram
 import config_module
 
 app = Flask(__name__)
-app.config['SESSION_TYPE'] = 'memcached'
-app.config['SECRET_KEY'] = 'super secret key'
 
 if(os.environ['SETTINGS'] == 'DevelopmentConfig'):
     connect('markov_data', host=config_module.DevelopmentConfig.DATABASE_URI)
@@ -57,7 +55,6 @@ def new_sentence(source_name):
 def show_new():
     global histogram
     sentence = histogram.get_sentence()
-    # sentence = histogram.print_sentence()
     print(sentence)
     return render_template('index.html', test = sentence)#, sentence_source = source['title'])
 
