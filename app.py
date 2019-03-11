@@ -1,6 +1,4 @@
 from flask import (Flask, render_template, redirect, url_for, make_response, flash, request, session)
-# from flask.sessions import *
-# from flask.sessions import Session
 import mongoengine
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
@@ -21,12 +19,9 @@ elif(os.environ['SETTINGS'] == 'ProductionConfig'):
 else:
     connect('markov_data', host=config_module.Config.DATABASE_URI)
     
-
 class sources(Document):
     title = StringField(required=True, max_length=200)
     content = StringField(required=True)
-    # first_order = StringField(required=True)
-    # second_order = StringField(required=True)
     third_order = StringField(required=True)
     fourth_order = StringField(required=True)
 
@@ -34,24 +29,9 @@ class sentences(Document):
     content = StringField(required=True)
     source = StringField(required=True)
 
-# app.root_path='/sentence/frankenstein'
-
 @app.route('/')
 def reroute():
     return redirect('/sentence/frankenstein', code=302)
-
-# @app.route('/')
-# def home():
-#     for source in sources.objects:
-#         source = source.to_mongo().to_dict()
-#         if source['title'] == 'sources/frankenstein.txt\n':
-#             histogram = Dictogram.from_dict(json.loads(source['third_order']))
-#             break
-#     # session['chain'] = histogram
-#     # return redirect('/sentence', code=302)
-#     histogram.get_sentence()
-#     sentence = histogram.print_sentence()
-#     return render_template('index.html', test = sentence, sentence_source = source['title'])
 
 @app.route('/', methods=['POST'])
 def save():
@@ -68,19 +48,9 @@ def new_sentence(source_name):
         if source['title'] == 'sources/'+source_name+'.txt\n':
             histogram = Dictogram.from_dict(json.loads(source['third_order']))
             break
-    # session['chain'] = histogram
-    # return redirect('/sentence', code=302)
     histogram.get_sentence()
     sentence = histogram.print_sentence()
     return render_template('index.html', test = sentence, sentence_source = source['title'])
-
-
-# @app.route('/sentence')
-# def runner():
-#     histogram = session['chain']
-#     histogram.get_sentence()
-#     sentence = histogram.print_sentence()
-#     return render_template('index.html', test = sentence)
 
 @app.route('/saved')
 def show():
@@ -90,25 +60,24 @@ def show():
         saved.append(sentence['content'])
     return render_template('saved.html', sentences = saved)
 
-
-@app.route('/load_sources')
-def load_sources():
-    # sources.drop_collection()
-    texts_list, word_list = [], []
-    f = open('texts.txt', 'r')
-    texts_list = f.readlines()
-    f.close()
-    for text in texts_list:
-        g = open(text.strip(), 'r')
-        word_list = g.readlines()
-        g.close()
-        words = utility.cleanse(word_list)
-        histogram_third = Dictogram(words, 3)
-        histogram_third.count_to_possibility()
-        histogram_fourth = Dictogram(words, 4)
-        histogram_fourth.count_to_possibility()
-        new_text = sources(title=text, content=" ".join(word_list), 
-                            third_order=json.dumps(histogram_third),
-                            fourth_order=json.dumps(histogram_fourth))
-        new_text.save()
-    return redirect('/', code=302)
+# @app.route('/load_sources')
+# def load_sources():
+#     # sources.drop_collection()
+#     texts_list, word_list = [], []
+#     f = open('texts.txt', 'r')
+#     texts_list = f.readlines()
+#     f.close()
+#     for text in texts_list:
+#         g = open(text.strip(), 'r')
+#         word_list = g.readlines()
+#         g.close()
+#         words = utility.cleanse(word_list)
+#         histogram_third = Dictogram(words, 3)
+#         histogram_third.count_to_possibility()
+#         histogram_fourth = Dictogram(words, 4)
+#         histogram_fourth.count_to_possibility()
+#         new_text = sources(title=text, content=" ".join(word_list), 
+#                             third_order=json.dumps(histogram_third),
+#                             fourth_order=json.dumps(histogram_fourth))
+#         new_text.save()
+#     return redirect('/', code=302)
