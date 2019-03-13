@@ -18,7 +18,7 @@ else:
     connect('markov_data', host=config_module.Config.DATABASE_URI)
     
 class sources(Document):
-    title = StringField(required=True, max_length=200)
+    title = StringField(required=True)
     content = StringField(required=True)
     third_order = StringField(required=True)
     fourth_order = StringField(required=True)
@@ -26,10 +26,6 @@ class sources(Document):
 class sentences(Document):
     content = StringField(required=True)
     source = StringField(required=True)
-
-class currentSource(Document):
-    content = StringField(required=True)
-    title = StringField(required=True)
 
 @app.route('/')
 def reroute():
@@ -44,33 +40,24 @@ def save():
 
 @app.route('/sentence/<source_name>')
 def new_sentence(source_name):
-    for source in sources.objects:
-        source = source.to_mongo().to_dict()
-        if source['title'] == 'sources/'+source_name+'.txt\n':
-            currentSource.drop_collection()
-            current_source = currentSource(source['third_order'], source['title'])
-            # global histogram
-            # histogram = Dictogram.from_dict(json.loads(source['third_order']))
-            current_source.save()
-            break
-    return redirect('/sentence', code=302)
-
-@app.route('/sentence')
-def show_new():
-    for source in currentSource.objects:
-        histogram = Dictogram.from_dict(json.loads(source['content']))
-        break
+    source = sources.objects(title__exact = 'sources/'+source_name+'.txt\n').first()
+    histogram = Dictogram.from_dict(json.loads(source['third_order']))
     sentence = histogram.get_sentence()
     print(sentence)
-    return render_template('index.html', test = sentence)#, sentence_source = source['title'])
+    return render_template('index.html', test = sentence, sentence_source = source['title'])
 
 @app.route('/saved')
-def show():
+def show_saved():
     saved = []
+    sources = []
     for sentence in sentences.objects:
         sentence = sentence.to_mongo().to_dict()
         saved.append(sentence['content'])
-    return render_template('saved.html', sentences = saved)
+        source_name = sentence['source'][8:-4]
+        sources.append(source_name)
+        print(source_name)
+        saved.append(source_name)
+    return render_template('saved.html', sentences = saved, source = sources)
 
 # @app.route('/load_sources')
 # def load_sources():
