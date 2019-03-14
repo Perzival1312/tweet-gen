@@ -11,13 +11,13 @@
     <h1>{{test}}</h1>
     <form action="/" method="post" id="saveSent">
         <input type="text" name="sentence" value="{{test}}" hidden=true>
-        <input type="text" name="source" value="{{sentence_source}}" hidden=true>
+        <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
     </form>
     <button type="submit" value="Submit" class="btn-link" form="saveSent"> Save Sentence </button>
     <button onclick="location.reload()"> New Sentence </button>
-    <select onchange="location.href=`/sentence/${this.value}`">
+    <select id="source-selector" onchange="location.href=`/sentence/${this.value}`">
         <option value=""> </option>
-        <option value="frankenstein">Frankenstein</option>
+        <option selected="selected" value="frankenstein">Frankenstein</option>
         <option value="modestproposal">A Modest Proposal</option>
         <option value="prideprejudice">Pride and Prejudice</option>
         <option value="secretgarden">The Secret Garden</option>
@@ -44,6 +44,6 @@
     </select> 
     <button onclick=" location.href='/saved' "> Show Saved </button>
     
-    <script src="../static/scripts.js"></script>
+    <script src="../static/indexScripts.js"></script>
 </body>
 </html>

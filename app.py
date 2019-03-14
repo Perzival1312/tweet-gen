@@ -49,13 +49,10 @@ def new_sentence(source_name):
 @app.route('/saved')
 def show_saved():
     saved = []
-    sources = []
     for sentence in sentences.objects:
         sentence = sentence.to_mongo().to_dict()
         saved.append(sentence['content'])
-        source_name = sentence['source'][8:-4]
-        sources.append(source_name)
-        print(source_name)
+        source_name = sentence['source'][8:-5]
         saved.append(source_name)
     return render_template('saved.html', sentences = saved, source = sources)
 
