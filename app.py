@@ -36,7 +36,7 @@ def save():
     data = request.form
     possible_sent = sentences(content= data['sentence'], source = data['source'])
     possible_sent.save()
-    return redirect('/', code=302)
+    return redirect(request.referrer, code=302)
 
 @app.route('/sentence/<source_name>')
 def new_sentence(source_name):
