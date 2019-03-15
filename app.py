@@ -9,6 +9,8 @@ from nth_order_markov_for_web import Dictogram
 import config_module
 
 app = Flask(__name__)
+SESSION_TYPE = config_module.Config.SESSION_TYPE
+app.secret_key = os.environ['SESSION_KEY']
 
 if(os.environ['SETTINGS'] == 'DevelopmentConfig'):
     connect('markov_data', host=config_module.DevelopmentConfig.DATABASE_URI)
@@ -40,10 +42,10 @@ def save():
 
 @app.route('/sentence/<source_name>')
 def new_sentence(source_name):
+    session['source'] = source_name
     source = sources.objects(title__exact = 'sources/'+source_name+'.txt\n').first()
     histogram = Dictogram.from_dict(json.loads(source['third_order']))
     sentence = histogram.get_sentence()
-    print(sentence)
     return render_template('index.html', test = sentence, sentence_source = source['title'])
 
 @app.route('/saved')
@@ -52,9 +54,9 @@ def show_saved():
     for sentence in sentences.objects:
         sentence = sentence.to_mongo().to_dict()
         saved.append(sentence['content'])
-        source_name = sentence['source'][8:-5]
+        source_name = sentence['source'][8:-4]
         saved.append(source_name)
-    return render_template('saved.html', sentences = saved, source = sources)
+    return render_template('saved.html', sentences = saved, source = sources, return_to = session['source'])
 
 # @app.route('/load_sources')
 # def load_sources():
