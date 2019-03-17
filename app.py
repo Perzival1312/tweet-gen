@@ -43,7 +43,7 @@ def save():
 @app.route('/sentence/<source_name>')
 def new_sentence(source_name):
     session['source'] = source_name
-    source = sources.objects(title__exact = 'sources/'+source_name+'.txt\n').first()
+    source = sources.objects(title__icontains = source_name).first()
     histogram = Dictogram.from_dict(json.loads(source['third_order']))
     sentence = histogram.get_sentence()
     return render_template('index.html', test = sentence, sentence_source = source['title'])
