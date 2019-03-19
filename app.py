@@ -3,10 +3,9 @@ import mongoengine
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
-import os, json
-import utility
+import os, json, requests
+import utility, config_module, twitter
 from nth_order_markov_for_web import Dictogram
-import config_module
 
 app = Flask(__name__)
 SESSION_TYPE = config_module.Config.SESSION_TYPE
@@ -57,6 +56,13 @@ def show_saved():
         source_name = sentence['source'][8:-4]
         saved.append(source_name)
     return render_template('saved.html', sentences = saved, source = sources, return_to = session['source'])
+
+@app.route('/share/twitter', methods=['POST'])
+def share():
+    data = request.form 
+    sentence = data['sentence']
+    twitter.tweet(sentence)
+    return redirect(request.referrer, code=302)
 
 # @app.route('/load_sources')
 # def load_sources():
