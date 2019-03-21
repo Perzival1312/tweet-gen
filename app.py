@@ -3,12 +3,28 @@ import mongoengine
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
 from flask_mongoengine import QuerySet
+from flask_scss import Scss
 import os, json, requests, PIL
 from PIL import Image, ImageDraw
 import utility, config_module, twitter, imgur
 from nth_order_markov_for_web import Dictogram
+from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
+
+assets     = Environment(app)
+assets.url = app.static_url_path
+scss       = Bundle('style.scss', filters='pyscss', output='all.css')
+
+assets.config['SECRET_KEY'] = os.environ['SESSION_KEY']
+assets.config['PYSCSS_LOAD_PATHS'] = assets.load_path
+assets.config['PYSCSS_STATIC_URL'] = assets.url
+assets.config['PYSCSS_STATIC_ROOT'] = assets.directory
+assets.config['PYSCSS_ASSETS_URL'] = assets.url
+assets.config['PYSCSS_ASSETS_ROOT'] = assets.directory
+
+assets.register('scss_all', scss)
+# Scss(app)#, static_dir='static', asset_dir='assets')
 SESSION_TYPE = config_module.Config.SESSION_TYPE
 app.secret_key = os.environ['SESSION_KEY']
 
@@ -18,7 +34,8 @@ elif(os.environ['SETTINGS'] == 'ProductionConfig'):
     connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
 else:
     connect('markov_data', host=config_module.Config.DATABASE_URI)
-    
+
+
 class sources(Document):
     title = StringField(required=True)
     content = StringField(required=True)
@@ -44,7 +61,7 @@ def save():
 def new_sentence(source_name):
     session['source'] = source_name
     source = sources.objects(title__icontains = source_name).first()
-    histogram = Dictogram.from_dict(json.loads(source['third_order']))
+    histogram = Dictogram.from_dict(json.loads(source['fourth_order']))
     sentence = histogram.get_sentence()
     return render_template('index.html', test = sentence, sentence_source = source['title'])
 

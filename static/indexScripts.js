@@ -1,3 +1,5 @@
+const body = document.getElementsByTagName('body')[0];
+const all = document.getElementsByTagName("*");
 let sourceName = document.getElementById('source-for-selector').defaultValue;
 let beginSliceInd = sourceName.indexOf('/');
 let endSliceIndex = sourceName.indexOf('.');
@@ -7,6 +9,9 @@ const mySelect = document.getElementById('source-selector');
 for(let i, j = 0; i = mySelect.options[j]; j++) {
     if(i.value == sourceName) {
         mySelect.selectedIndex = j;
+        for(let k=0; k<all.length; k++){
+            body.classList.add(sourceName)
+        }
         break;
     }
 }

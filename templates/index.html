@@ -5,51 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>tweet-gen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../static/style.css" rel="stylesheet" type="text/css">
+    {% assets "scss_all" %}
+        <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+    {% endassets %}
+    <!-- <link href="../static/all.css" rel="stylesheet" type="text/scss"> -->
 </head>
 <body>
-    <h1>{{test}}</h1>
-    <form action="/" method="post" id="saveSent">
-        <input type="text" name="sentence" value="{{test}}" hidden=true>
-        <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
-    </form>
-    <button type="submit" value="Submit" class="btn-link" form="saveSent"> Save Sentence </button>
-    <form action="/share/twitter" method="POST" id="tShareSent">
-        <input type="text" name="sentence" value="{{test}}" hidden=true>
-    </form>
-    <button type="submit" value="Submit" form="tShareSent">Share to Twitter</button>
-    <form action="/share/imgur" method="POST" id="IShareSent">
-        <input type="text" name="sentence" value="{{test}}" hidden=true>
-    </form>
-    <button type="submit" value="Submit" form="IShareSent">Share to Imgur</button>
 
-    <button onclick="location.reload()"> New Sentence </button>
-    <select id="source-selector" onchange="location.href=`/sentence/${this.value}`">
-        <option selected="selected" value="frankenstein">Frankenstein</option>
-        <option value="modestproposal">A Modest Proposal</option>
-        <option value="prideprejudice">Pride and Prejudice</option>
-        <option value="secretgarden">The Secret Garden</option>
-        <option value="taletwocities">A Tale of Two Cities</option>
-        <option value="huckleberryfinn">Huckleberry Finn</option>
-        <option value="jekyllhyde">Jekyll and Hyde</option>
-        <option value="mobydick">Moby Dick</option>
-        <option value="tomsawyer">Tom Sawyer</option>
-        <option value="scarletletter">The Scarlet Letter</option>
-        <option value="christmascarol">A Christams Carol</option>
-        <option value="grimmtales">Tales of Brothers Grimm</option>
-        <option value="leviathan">Leviathan</option>
-        <option value="treasureisland">Treasure Island</option>
-        <option value="baskerville">The Hounds of Baskerville</option>
-        <option value="divinecomedy">Divine Comedy</option>
-        <option value="gulliver">Gullivers Travels</option>
-        <option value="olivertwist">Oliver Twist</option>
-        <option value="poev2">Poe Poems</option>
-        <option value="studyscarlet">A Study in Scarlet</option>
-        <option value="timemachine">The Time Machine</option>
-        <option value="tomcabin">Uncle Toms Cabin</option>
-        <option value="warofworlds">War of the Worlds</option>
-        <option value="wizardoz">Wizard of Oz</option>
-    </select> 
+    <div class="Sentence">
+        <h2>{{test}}</h2>
+    </div>
+
+    <div class="Sharing">
+        <form action="/" method="post" id="saveSent">
+            <input type="text" name="sentence" value="{{test}}" hidden=true>
+            <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
+        </form>
+        <button type="submit" value="Submit" class="btn-link" form="saveSent"> Save Sentence </button>
+        <form action="/share/twitter" method="POST" id="tShareSent">
+            <input type="text" name="sentence" value="{{test}}" hidden=true>
+        </form>
+        <button type="submit" value="Submit" form="tShareSent">Share to Twitter</button>
+        <form action="/share/imgur" method="POST" id="IShareSent">
+            <input type="text" name="sentence" value="{{test}}" hidden=true>
+        </form>
+        <button type="submit" value="Submit" form="IShareSent">Share to Imgur</button>
+    </div>
+
+    <div class="New-Sentence">
+        <button onclick="location.reload()"> New Sentence </button>
+    </div>
+
+    <div class="New-Source">
+        <select id="source-selector" onchange="location.href=`/sentence/${this.value}`">
+            <option selected="selected" value="frankenstein">Frankenstein</option>
+            <option value="modestproposal">A Modest Proposal</option>
+            <option value="prideprejudice">Pride and Prejudice</option>
+            <option value="secretgarden">The Secret Garden</option>
+            <option value="taletwocities">A Tale of Two Cities</option>
+            <option value="huckleberryfinn">Huckleberry Finn</option>
+            <option value="jekyllhyde">Jekyll and Hyde</option>
+            <option value="mobydick">Moby Dick</option>
+            <option value="tomsawyer">Tom Sawyer</option>
+            <option value="scarletletter">The Scarlet Letter</option>
+            <option value="christmascarol">A Christams Carol</option>
+            <option value="grimmtales">Tales of Brothers Grimm</option>
+            <option value="leviathan">Leviathan</option>
+            <option value="treasureisland">Treasure Island</option>
+            <option value="baskerville">The Hounds of Baskerville</option>
+            <option value="divinecomedy">Divine Comedy</option>
+            <option value="gulliver">Gullivers Travels</option>
+            <option value="olivertwist">Oliver Twist</option>
+            <option value="poev2">Poe Poems</option>
+            <option value="studyscarlet">A Study in Scarlet</option>
+            <option value="timemachine">The Time Machine</option>
+            <option value="tomcabin">Uncle Toms Cabin</option>
+            <option value="warofworlds">War of the Worlds</option>
+            <option value="wizardoz">Wizard of Oz</option>
+        </select> 
+    </div>
+
     <button onclick=" location.href='/saved' "> Show Saved </button>
     
     <script src="../static/indexScripts.js"></script>

@@ -10,3 +10,5 @@ facebook.py
 *.jpg
 *.png
 .env
+.webassets-cache
+all.css
