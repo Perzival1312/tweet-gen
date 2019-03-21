@@ -2,6 +2,9 @@ import string, os, re
 end_punt = ".!?"
 string.punctuation += "”“’‘—"
 string.punctuation += string.digits
+apostophe_ind = string.punctuation.index("'")
+string.punctuation = string.punctuation[:apostophe_ind] + string.punctuation[apostophe_ind+1:]
+print(string.punctuation)
 period_str = "\nSTOP\nSTART"
 
 def cleanse(text):
