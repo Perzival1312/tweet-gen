@@ -18,6 +18,10 @@
         <input type="text" name="sentence" value="{{test}}" hidden=true>
     </form>
     <button type="submit" value="Submit" form="tShareSent">Share to Twitter</button>
+    <form action="/share/imgur" method="POST" id="IShareSent">
+        <input type="text" name="sentence" value="{{test}}" hidden=true>
+    </form>
+    <button type="submit" value="Submit" form="IShareSent">Share to Imgur</button>
 
     <button onclick="location.reload()"> New Sentence </button>
     <select id="source-selector" onchange="location.href=`/sentence/${this.value}`">
