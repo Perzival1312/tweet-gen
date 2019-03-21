@@ -9,17 +9,9 @@ def cleanse(text):
     words_list = []
     periods = str.maketrans({key: period_str for key in end_punt})
     other_punct = str.maketrans({key: None for key in string.punctuation})
-    # if(os.environ['SETTINGS'] == 'DevelopmentConfig'):
-    #     for sentences in text:
-    #         words_list += sentences.split()
-    # if(os.environ['SETTINGS'] == 'ProductionConfig'):
-    #     words_list = text.split()
-    # print(type(' '.join(text)))
     text = ' '.join(text)
-    # print(text[0:30])
-    print(re.search(r'(.*\\n)*(?=(\*\*\*[ ]?(START OF).*\*\*\*))', text, re.DOTALL).group(0))
-    rex = re.compile(r'(.*\\n)*(?=(\*\*\*[ ]?(START OF).*\*\*\*))', re.DOTALL)#(\*\*\*[ ]?(START OF).*\*\*\*)
-    text = rex.sub('IMWORKINGHERENOWGTFOsbbyuvtrtexrcvgbhiyutyrtexcfvbyutyrtcfvgb', text, count=1)
+    text = re.sub(r'(.|\n)*(\*{2,3}[ ]?(START OF).*(\n)?.*\*{2,3})', "", text, count=1) 
+    text = re.sub(r'(\*{2,3}[ ]?(END OF).*(\n)?.*\*{2,3})(.|\n)*', "", text, count=1) 
     words_list = text.split()
     # for sentences in text:
     #     words_list += sentences.split()
@@ -35,8 +27,8 @@ def cleanse(text):
         ret_list.extend(word)
     ret_list.insert(0, "START")
     ret_list.append("STOP")
-    print(repr(ret_list[:250]))
-    print(repr(ret_list[175]))
+    # print(repr(ret_list[:250]))
+    # print(repr(ret_list[169]))
 
     # for i in range(50):
     #     print(ret_list[i])
