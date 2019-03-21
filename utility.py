@@ -4,7 +4,7 @@ string.punctuation += "”“’‘—"
 string.punctuation += string.digits
 apostophe_ind = string.punctuation.index("'")
 string.punctuation = string.punctuation[:apostophe_ind] + string.punctuation[apostophe_ind+1:]
-period_str = "\nSTOP\nSTART"
+period_str = "\nSTOP\nSTART\n"
 
 def cleanse(text):
     ret_list = []

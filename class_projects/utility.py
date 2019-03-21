@@ -4,8 +4,7 @@ string.punctuation += "”“’‘—"
 string.punctuation += string.digits
 apostophe_ind = string.punctuation.index("'")
 string.punctuation = string.punctuation[:apostophe_ind] + string.punctuation[apostophe_ind+1:]
-print(string.punctuation)
-period_str = "\nSTOP\nSTART"
+period_str = "\nSTOP\nSTART\n"
 
 def cleanse(text):
     ret_list = []
@@ -16,8 +15,8 @@ def cleanse(text):
     text = re.sub(r'(.|\n)*(\*{2,3}[ ]?(START OF).*(\n)?.*\*{2,3})', "", text, count=1) 
     text = re.sub(r'(\*{2,3}[ ]?(END OF).*(\n)?.*\*{2,3})(.|\n)*', "", text, count=1) 
     words_list = text.split()
-    # for sentences in text:
-    #     words_list += sentences.split()
+    # for sentence in text:
+    #     words_list += sentence.split()
     
     for word in range(len(words_list)):
         if words_list[word] != 'I' or words_list[word] != 'i':
