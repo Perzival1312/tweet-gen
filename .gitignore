@@ -7,6 +7,6 @@ __pycache__/
 .json
 Future.txt
 facebook.py
-.env
+env-setup.sh
 .webassets-cache
 all.css

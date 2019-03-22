@@ -52,6 +52,9 @@ body {
             background-color: rgb(54, 190, 116);
             font-weight: 800;
         }
+        .imgur, .twitter:hover {
+            cursor: pointer;
+        }
     }
 
     .New-Sentence {
@@ -60,7 +63,7 @@ body {
         justify-content: space-between;
         width: 200px;
         height: 12vh;
-        button {
+        .new-button {
             border: none;
             height: 45px;
             color: rgb(21, 105, 201);
@@ -73,7 +76,7 @@ body {
             background-color: rgb(15, 67, 126);
             cursor: pointer;
         }
-        select {
+        .new-select {
             background-color: #555;
             border: 1px solid #AAA;
             border-radius: 2px;
@@ -110,7 +113,8 @@ body {
             background-repeat: no-repeat;
             background-color: #eeeded;
             border: none;
-        }:hover {
+        }
+        .imgur:hover, .twitter:hover {
             cursor: pointer;
         }
     }

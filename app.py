@@ -24,7 +24,7 @@ assets.config['PYSCSS_ASSETS_URL'] = assets.url
 assets.config['PYSCSS_ASSETS_ROOT'] = assets.directory
 
 assets.register('scss_all', scss)
-# Scss(app)#, static_dir='static', asset_dir='assets')
+
 SESSION_TYPE = config_module.Config.SESSION_TYPE
 app.secret_key = os.environ['SESSION_KEY']
 
@@ -34,7 +34,6 @@ elif(os.environ['SETTINGS'] == 'ProductionConfig'):
     connect('markov_data', host=config_module.ProductionConfig.DATABASE_URI)
 else:
     connect('markov_data', host=config_module.Config.DATABASE_URI)
-
 
 class sources(Document):
     title = StringField(required=True)
