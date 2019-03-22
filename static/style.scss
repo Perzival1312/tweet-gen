@@ -85,7 +85,7 @@ body {
             padding-bottom: 2px;
         }
     }
-    
+
     .Show-Saved {
         color: rgb(0, 0, 0);
         text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
@@ -116,33 +116,38 @@ body {
     }
 }
 
-.frankenstein {
+.frankenstein, .modestproposal {
     background-image: url(../static/images/frankenstien_bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    
     .Sentence {
         width: 57%;
         margin-left: 5%;
         margin-top: 2%;
     }
-    
     .Sharing {
         position: absolute;
         top: 70vh;
         left: 5vw;
     }
-    
     .New-Sentence {
         position: absolute;
         top: 75vh;
         left: 40vw;
     }
-    
     .Show-Saved {
         position: absolute;
         top: 70vh;
         left: 80vw;
+    }
+}
+
+.modestproposal {
+    background-image: url(../static/images/modestproposal_bg.jpeg);
+    .Sentence {
+        width: 30%;
+        margin-left: 65%;
+        margin-top: 18%;
     }
 }
 
