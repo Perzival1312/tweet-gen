@@ -66,6 +66,7 @@ class Dictogram(dict):
                 possibilies.append(key)
         self.random_sent = list(random.choice(possibilies))
     
+    # generate cumulative probabilities
     def count_to_possibility(self):
         for values in self.values():
             prev_val = 0

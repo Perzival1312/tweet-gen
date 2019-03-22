@@ -6,6 +6,7 @@ apostophe_ind = string.punctuation.index("'")
 string.punctuation = string.punctuation[:apostophe_ind] + string.punctuation[apostophe_ind+1:]
 period_str = "\nSTOP\nSTART\n"
 
+# TODO: USE NLTK
 def cleanse(text):
     ret_list = []
     words_list = []
