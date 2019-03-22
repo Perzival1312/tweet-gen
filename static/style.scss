@@ -2,34 +2,22 @@ body {
     font-family: sans-serif;
     background: rgb(0, 0, 0);
     color: aqua;
-}
-
-.frankenstein {
-    background-image: url(../static/images/frankenstien_bg.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
     
     button {
         border-radius: 6px;
     }
-    
+
     .Sentence {
         border-style: solid;
         color: rgb(238, 238, 238);
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-        width: 57%;
-        margin-left: 5%;
-        margin-top: 2%;
         padding: 1%;
         padding-top: 0;
         padding-bottom: 0;
         line-height: 1.2;
     }
-    
+
     .Sharing {
-        position: absolute;
-        top: 70vh;
-        left: 5vw;
         color: rgb(0, 0, 0);
         text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
         display: flex;
@@ -65,12 +53,9 @@ body {
             font-weight: 800;
         }
     }
-    
+
     .New-Sentence {
         display: flex;
-        position: absolute;
-        top: 75vh;
-        left: 40vw;
         flex-direction: column;
         justify-content: space-between;
         width: 15vw;
@@ -89,13 +74,11 @@ body {
             cursor: pointer;
         }
         select {
-            // * { color:purple; }
             background-color: #555;
             border: 1px solid #AAA;
             border-radius: 2px;
             box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
             color: #000000;
-            // font-weight: bold;
             font-size: 18px;
             margin: 0;
             padding-top: 2px;
@@ -106,9 +89,6 @@ body {
     .Show-Saved {
         color: rgb(0, 0, 0);
         text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
-        position: absolute;
-        top: 70vh;
-        left: 80vw;
         display: flex;
         flex-direction: column;
         .imgur {
@@ -133,6 +113,36 @@ body {
         }:hover {
             cursor: pointer;
         }
+    }
+}
+
+.frankenstein {
+    background-image: url(../static/images/frankenstien_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    .Sentence {
+        width: 57%;
+        margin-left: 5%;
+        margin-top: 2%;
+    }
+    
+    .Sharing {
+        position: absolute;
+        top: 70vh;
+        left: 5vw;
+    }
+    
+    .New-Sentence {
+        position: absolute;
+        top: 75vh;
+        left: 40vw;
+    }
+    
+    .Show-Saved {
+        position: absolute;
+        top: 70vh;
+        left: 80vw;
     }
 }
 
