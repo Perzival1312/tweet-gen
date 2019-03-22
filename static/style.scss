@@ -58,7 +58,7 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 15vw;
+        width: 200px;
         height: 12vh;
         button {
             border: none;
@@ -116,15 +116,9 @@ body {
     }
 }
 
-.frankenstein, .modestproposal {
-    background-image: url(../static/images/frankenstien_bg.jpg);
+.basesetup {
     background-repeat: no-repeat;
-    background-size: cover;
-    .Sentence {
-        width: 57%;
-        margin-left: 5%;
-        margin-top: 2%;
-    }
+    background-size: 100vw 100vh;
     .Sharing {
         position: absolute;
         top: 70vh;
@@ -138,16 +132,63 @@ body {
     .Show-Saved {
         position: absolute;
         top: 70vh;
-        left: 80vw;
+        left: 85vw;
+    }
+}
+
+.frankenstein {
+    @extend .basesetup;
+    background-image: url(../static/images/frankenstien_bg.jpg);
+    .Sentence {
+        width: 57%;
+        margin-left: 5%;
+        margin-top: 2%;
     }
 }
 
 .modestproposal {
+    @extend .basesetup;
     background-image: url(../static/images/modestproposal_bg.jpeg);
     .Sentence {
         width: 30%;
         margin-left: 65%;
         margin-top: 18%;
+    }
+}
+
+.prideprejudice {
+    @extend .basesetup;
+    background-image: url(../static/images/prideprejudice_bg.jpg);
+    .Sentence {
+        width: 35%;
+        margin-left: 22%;
+        margin-top: 15%;
+    }
+    .Show-Saved, .Sharing {
+        top: 75vh;
+    }
+    .New-Sentence {
+        top: 78vh;
+    }
+}
+
+.secretgarden {
+    @extend .basesetup;
+    background-image: url(../static/images/secretgarden_bg.jpg);
+    .Sentence {
+        width: 35%;
+        margin-left: 8%;
+        margin-top: 20%;
+    }
+}
+
+.huckleberryfinn {
+    @extend .basesetup;
+    background-image: url(../static/images/hucckleberryfinn_bg.jpg);
+    .Sentence {
+        width: 20%;
+        margin-left: 34%;
+        margin-top: 20%;
     }
 }
 
