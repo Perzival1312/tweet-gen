@@ -17,26 +17,25 @@
     </div>
 
     <div class="Sharing">
+        <h3>Share</h3>
         <form action="/" method="post" id="saveSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
             <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
         </form>
-        <button type="submit" value="Submit" class="btn-link" form="saveSent"> Save Sentence </button>
+        <button type="submit" value="Submit" class="btn-link" form="saveSent" hidden=true> Save Sentence </button>
         <form action="/share/twitter" method="POST" id="tShareSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
         </form>
-        <button type="submit" value="Submit" form="tShareSent">Share to Twitter</button>
+        <button class="twitter" type="submit" value="Submit" form="tShareSent"> Share to Twitter</button>
         <form action="/share/imgur" method="POST" id="IShareSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
         </form>
-        <button type="submit" value="Submit" form="IShareSent">Share to Imgur</button>
+        <button class="imgur" type="submit" value="Submit" form="IShareSent">
+            <img src="https://s.imgur.com/desktop-assets/desktop-assets/icon-new-post.13ab64f9f36ad8f25ae3544b350e2ae1.svg" alt="Share to"> Imgur</button>
     </div>
 
     <div class="New-Sentence">
         <button onclick="location.reload()"> New Sentence </button>
-    </div>
-
-    <div class="New-Source">
         <select id="source-selector" onchange="location.href=`/sentence/${this.value}`">
             <option selected="selected" value="frankenstein">Frankenstein</option>
             <option value="modestproposal">A Modest Proposal</option>
@@ -65,7 +64,12 @@
         </select> 
     </div>
 
-    <button onclick=" location.href='/saved' "> Show Saved </button>
+    <div class="Show-Saved">
+        <h3>View Shared</h3>
+        <!-- <button class="local" onclick="location.href='/saved' "> Show Saved </button> -->
+        <button class="twitter" onclick="location.href='https://twitter.com/JustABo49350876'"></button>
+        <button class="imgur" onclick="location.href='https://imgur.com/user/justabotthatwantstomakememes/posts'">........................</button>
+    </div>
     
     <script src="../static/indexScripts.js"></script>
 </body>
