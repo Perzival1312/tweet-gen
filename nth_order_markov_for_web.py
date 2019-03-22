@@ -5,35 +5,37 @@ import sys, string, utility, random, json
 # {(word1, word2) : [word3, count]}
 # {(word2, word3) : STOPS}
 
-class Dictogram(dict):
-    """Dictogram is a histogram implemented as a subclass of the dict type."""
-    def __init__(self, source=None, order=2):
+class Markov(dict):
+    """Markov is a histogram implemented as a subclass of the dict type."""
+    def __init__(self, source=None, order=1):
         words_list = source
         """Initialize this histogram as a new dict and count given words."""
-        super(Dictogram, self).__init__()  # Initialize this as a new dict
+        super(Markov, self).__init__()  # Initialize this as a new dict
         self.random_sent = ["START"]
-        self.order = order
+        self.order = order # TODO: make this into a local var in init method usage
         self.original_order = order
+        # Creates a set of words the number of which is the Order to act as the key
         for ind, word in enumerate(words_list):
             word_set = [word]
             try:
-                for i in range(1, self.order-1):
+                for i in range(1, self.order):
                     word_set.append(words_list[ind + i])
             except IndexError:
-                if self.order == 1:
+                if self.order == 0:
                     pass
                 else:
                     self.order -= 1
                     continue                
             word_set = ' '.join(word_set)
+            # Adds new words to the dict depending on whether or not they are already inside
             if (word_set) in self:
                 try:
-                    if words_list[ind+self.order-1] in self[word_set]:
+                    if words_list[ind+self.order] in self[word_set]:
                         # in first and inset
-                        self[word_set][0][words_list[ind+self.order-1]] += 1
+                        self[word_set][0][words_list[ind+self.order]] += 1
                     else:
                         # in first but not inset
-                        self[word_set][0][words_list[ind+self.order-1]] = 1
+                        self[word_set][0][words_list[ind+self.order]] = 1
                     self[word_set][1] += 1
                 except IndexError:
                     pass
@@ -41,24 +43,26 @@ class Dictogram(dict):
                 try:
                     # new word
                     self[word_set] = [{}, 1]
-                    self[word_set][0][words_list[ind+self.order-1]] =  1
+                    self[word_set][0][words_list[ind+self.order]] =  1
                 except IndexError:
                     pass
         self.order = self.original_order
     
     @classmethod
     def from_dict(cls, old_dict):
-        obj = cls.__new__(cls)
-        for key, value in old_dict.items():
-            if key.startswith('START'):
-                ord = len(key.split())
-            obj[key] = value
-        obj.order = ord+1
-        obj.random_sent = ['START']
-        cls.create_random_seed(obj)
-        return obj
+        '''Creates new Markov from a given dictionary represention of a Markov'''
+        markov = cls.__new__(cls)
+        for word_set, hist_tokens in old_dict.items():
+            if word_set.startswith('START'):
+                order = len(word_set.split())
+            markov[word_set] = hist_tokens
+        markov.order = order
+        markov.random_sent = ['START']
+        cls.create_random_seed(markov)
+        return markov
 
     def create_random_seed(self):
+        # gets the first set of words to start the randomly generated sentence
         possibilies = []
         for key in self.keys():
             key = key.split()
@@ -66,8 +70,8 @@ class Dictogram(dict):
                 possibilies.append(key)
         self.random_sent = list(random.choice(possibilies))
     
-    # generate cumulative probabilities
     def count_to_possibility(self):
+    # generate cumulative probabilities
         for values in self.values():
             prev_val = 0
             for key, value in values[0].items():
@@ -75,35 +79,44 @@ class Dictogram(dict):
                 prev_val = values[0][key]
 
     def sample(self):
-        prev_word = []
-        for i in range(self.order-1, 0, -1):
-            prev_word.append(self.random_sent[len(self.random_sent)-i])
-        prev_word = ' '.join(prev_word)
+        # gets the next word basd on the previous set of words
+        prev_words = []
+        for i in range(self.order, 0, -1):
+            prev_words.append(self.random_sent[len(self.random_sent)-i])
+        prev_words = ' '.join(prev_words)
         chance = random.random()
         prev_val = 0
         choice = ""
-        for key, value in self[prev_word][0].items():
+        for key, value in self[prev_words][0].items():
             if chance < value and chance > prev_val:
                 choice = key
                 break
-            prev_val = self[prev_word][0][key]
+            prev_val = self[prev_words][0][key]
         return choice
 
     def get_sentence(self):
+    # generates the sentence using sample() to get next
         self.create_random_seed()
-        try:
-            next = ""
-            while next != "STOP":
-                next = self.sample()
-                if next != "START":
-                    self.random_sent.append(next)
-        except KeyError:
-            self.get_sentence()
-        except RecursionError:
-            pass
-        try:
-            sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
-            return sentence[0].capitalize() + sentence[1:] + '.'
-        except IndexError:
-            self.random_sent = ['START']
-            self.get_sentence()
+        next = ""
+        while next != "STOP":
+            next = self.sample()
+            if next != "START" and next != '':
+                self.random_sent.append(next)
+        # formats sentence for mass consumption
+        sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
+        return sentence[0].capitalize() + sentence[1:] + '.'
+
+
+def main():
+    import sys
+    arguments = sys.argv[1:]  # Exclude script name in first argument
+    if len(arguments) == 2:
+        words = utility.read(arguments[0])
+        words = utility.cleanse(words)
+        # if arg[1] < 1 raise value error
+        histogram = Markov(words, int(arguments[1])+1)
+        histogram.count_to_possibility()
+        print(histogram.get_sentence())
+
+if __name__ == '__main__':
+    main()

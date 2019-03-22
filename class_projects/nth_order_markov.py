@@ -81,25 +81,29 @@ class Dictogram(dict):
         chance = random.random()
         prev_val = 0
         choice = ""
-        for key, value in self[prev_word][0].items():
-            if chance < value and chance > prev_val:
-                choice = key
-                break
-            prev_val = self[prev_word][0][key]
+        if prev_word not in self:
+            print(prev_word)
+            # return 
+        else:
+            for key, value in self[prev_word][0].items():
+                if chance < value and chance > prev_val:
+                    choice = key
+                    break
+                prev_val = self[prev_word][0][key]
         
         return choice
 
     def get_sentence(self):
-        try:
-            next = ""
-            while next != "STOP":
-                next = self.sample()
-                if next != "START":
-                    self.random_sent.append(next)
-        except KeyError:
-            self.get_sentence()
-        except RecursionError:
-            pass
+        # try:
+        next = ""
+        while next != "STOP":
+            next = self.sample()
+            if next != "START" and next != '':
+                self.random_sent.append(next)
+        # except KeyError:
+        #     self.get_sentence()
+        # except RecursionError:
+        #     pass
     
     def print_sentence(self):
         sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
@@ -112,6 +116,7 @@ def main():
     if len(arguments) == 2:
         words = utility.read(arguments[0])
         words = utility.cleanse(words)
+        # if arg[1] < 1 raise value error
         histogram = Dictogram(words, int(arguments[1])+1)
         histogram.count_to_possibility()
         histogram.get_sentence()

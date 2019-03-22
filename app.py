@@ -7,7 +7,7 @@ from flask_scss import Scss
 import os, json, requests, PIL
 from PIL import Image, ImageDraw
 import utility, config_module, twitter, imgur
-from nth_order_markov_for_web import Dictogram
+from nth_order_markov_for_web import Markov
 from flask_assets import Environment, Bundle
 
 app = Flask(__name__)
@@ -61,7 +61,7 @@ def save():
 def new_sentence(source_name):
     session['source'] = source_name
     source = sources.objects(title__icontains = source_name).first()
-    histogram = Dictogram.from_dict(json.loads(source['fourth_order']))
+    histogram = Markov.from_dict(json.loads(source['fourth_order']))
     sentence = histogram.get_sentence()
     return render_template('index.html', test = sentence, sentence_source = source['title'])
 
@@ -102,9 +102,9 @@ def Imgur_share():
 #         word_list = g.readlines()
 #         g.close()
 #         words = utility.cleanse(word_list)
-#         histogram_third = Dictogram(words, 3)
+#         histogram_third = Markov(words, 3)
 #         histogram_third.count_to_possibility()
-#         histogram_fourth = Dictogram(words, 4)
+#         histogram_fourth = Markov(words, 4)
 #         histogram_fourth.count_to_possibility()
 #         new_text = sources(title=text, content=" ".join(word_list), 
 #                             third_order=json.dumps(histogram_third),
