@@ -94,7 +94,8 @@ def show_saved():
 def Twitter_share():
     data = request.form 
     sentence = data['sentence']
-    twitter.tweet(sentence)
+    source = data['source']
+    twitter.tweet(sentence, source)
     return redirect(request.referrer, code=302)
 
 ## ------------------------------------ ##

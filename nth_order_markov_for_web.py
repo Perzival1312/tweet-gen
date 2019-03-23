@@ -13,8 +13,8 @@ class Markov(dict):
         words_list = source
         super(Markov, self).__init__()  # Initialize this as a new dict
         self.random_sent = ["START"]
-        init_window_size = order # TODO: make this into a local var in init method usage
         self.order = order
+        init_window_size = order 
         # Creates a set of words the number of which is the Order to act as the key
         for ind, word in enumerate(words_list):
             word_set = [word]

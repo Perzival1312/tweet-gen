@@ -18,20 +18,26 @@
 
     <div class="Sharing">
         <h3>Share</h3>
+        
         <form action="/" method="post" id="saveSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
             <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
         </form>
         <button type="submit" value="Submit" class="btn-link" form="saveSent" hidden=true> Save Sentence </button>
+        
         <form action="/share/twitter" method="POST" id="tShareSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
+            <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
         </form>
         <button class="twitter" type="submit" value="Submit" form="tShareSent"> Share to Twitter</button>
+        
         <form action="/share/imgur" method="POST" id="IShareSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
+            <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
         </form>
         <button class="imgur" type="submit" value="Submit" form="IShareSent">
             <img src="https://s.imgur.com/desktop-assets/desktop-assets/icon-new-post.13ab64f9f36ad8f25ae3544b350e2ae1.svg" alt="Share to"> Imgur</button>
+
     </div>
 
     <div class="New-Sentence">

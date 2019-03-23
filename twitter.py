@@ -14,7 +14,16 @@ session = OAuth1Session(consumer_key,
 # The URL endpoint to update a status (i.e. tweet)
 url = 'https://api.twitter.com/1.1/statuses/update.json'
 
-def tweet(status):
+hashtag_conversion_dict = {
+    'frankenstein'      : '#Frankenstein',
+    'modestproposal'    : '#modestproposal',
+    'prideprejudice'    : '#PrideandPrejudice',
+    'secretgarden'      : '#theSecretGarden',
+    'huckleberryfinn'   : '#HuckleBerryFinn'
+}
+
+def tweet(status, source):
+    status = status + ' ' + hashtag_conversion_dict[source[8:-4]]
     resp = session.post(url, { 'status': status })
     return resp.text
     
