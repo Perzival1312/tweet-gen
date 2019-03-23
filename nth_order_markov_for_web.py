@@ -8,6 +8,7 @@ import sys, string, utility, random, json
 class Markov(dict):
     """Markov is a histogram implemented as a subclass of the dict type."""
     def __init__(self, source=None, order=1):
+        # if order < 1 raise value error
         words_list = source
         """Initialize this histogram as a new dict and count given words."""
         super(Markov, self).__init__()  # Initialize this as a new dict
@@ -64,8 +65,10 @@ class Markov(dict):
     def create_random_seed(self):
         # gets the first set of words to start the randomly generated sentence
         possibilies = []
+        # print(self)
         for key in self.keys():
             key = key.split()
+            # print(key)
             if key[0] == "START":
                 possibilies.append(key)
         self.random_sent = list(random.choice(possibilies))
@@ -104,6 +107,12 @@ class Markov(dict):
                 self.random_sent.append(next)
         # formats sentence for mass consumption
         sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
+        # remove spaces before punctuation 
+        for ind, character in enumerate(sentence):
+            if character == ' ':
+                if ind+1 < len(sentence):
+                    if string.punctuation.__contains__(sentence[ind+1]):
+                        sentence = sentence[:ind] + sentence[ind+1:]
         return sentence[0].capitalize() + sentence[1:] + '.'
 
 
@@ -113,7 +122,6 @@ def main():
     if len(arguments) == 2:
         words = utility.read(arguments[0])
         words = utility.cleanse(words)
-        # if arg[1] < 1 raise value error
         histogram = Markov(words, int(arguments[1])+1)
         histogram.count_to_possibility()
         print(histogram.get_sentence())
