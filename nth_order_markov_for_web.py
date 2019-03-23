@@ -8,35 +8,36 @@ import sys, string, utility, random, json
 class Markov(dict):
     """Markov is a histogram implemented as a subclass of the dict type."""
     def __init__(self, source=None, order=1):
-        # if order < 1 raise value error
+        if order < 1:
+            raise ValueError('Order needs to be greater than or equal to 1.')
         words_list = source
-        """Initialize this histogram as a new dict and count given words."""
         super(Markov, self).__init__()  # Initialize this as a new dict
         self.random_sent = ["START"]
-        self.order = order # TODO: make this into a local var in init method usage
-        self.original_order = order
+        init_window_size = order # TODO: make this into a local var in init method usage
+        self.order = order
         # Creates a set of words the number of which is the Order to act as the key
         for ind, word in enumerate(words_list):
             word_set = [word]
             try:
-                for i in range(1, self.order):
+                for i in range(1, init_window_size):
                     word_set.append(words_list[ind + i])
+            # towards end of input and window size should shrink so as not to get index errors
             except IndexError:
-                if self.order == 0:
+                if init_window_size == 0:
                     pass
                 else:
-                    self.order -= 1
+                    init_window_size -= 1
                     continue                
             word_set = ' '.join(word_set)
             # Adds new words to the dict depending on whether or not they are already inside
             if (word_set) in self:
                 try:
-                    if words_list[ind+self.order] in self[word_set]:
+                    if words_list[ind+init_window_size] in self[word_set]:
                         # in first and inset
-                        self[word_set][0][words_list[ind+self.order]] += 1
+                        self[word_set][0][words_list[ind+init_window_size]] += 1
                     else:
                         # in first but not inset
-                        self[word_set][0][words_list[ind+self.order]] = 1
+                        self[word_set][0][words_list[ind+init_window_size]] = 1
                     self[word_set][1] += 1
                 except IndexError:
                     pass
@@ -44,14 +45,13 @@ class Markov(dict):
                 try:
                     # new word
                     self[word_set] = [{}, 1]
-                    self[word_set][0][words_list[ind+self.order]] =  1
+                    self[word_set][0][words_list[ind+init_window_size]] =  1
                 except IndexError:
                     pass
-        self.order = self.original_order
     
     @classmethod
     def from_dict(cls, old_dict):
-        '''Creates new Markov from a given dictionary represention of a Markov'''
+        '''Creates new Markov object from a given dictionary represention of a Markov'''
         markov = cls.__new__(cls)
         for word_set, hist_tokens in old_dict.items():
             if word_set.startswith('START'):
@@ -63,18 +63,16 @@ class Markov(dict):
         return markov
 
     def create_random_seed(self):
-        # gets the first set of words to start the randomly generated sentence
+        '''gets the first set of words to start the randomly generated sentence'''
         possibilies = []
-        # print(self)
         for key in self.keys():
             key = key.split()
-            # print(key)
             if key[0] == "START":
                 possibilies.append(key)
         self.random_sent = list(random.choice(possibilies))
     
     def count_to_possibility(self):
-    # generate cumulative probabilities
+        '''generate cumulative probabilities'''
         for values in self.values():
             prev_val = 0
             for key, value in values[0].items():
@@ -82,7 +80,7 @@ class Markov(dict):
                 prev_val = values[0][key]
 
     def sample(self):
-        # gets the next word basd on the previous set of words
+        '''gets the next word based on the previous set of words'''
         prev_words = []
         for i in range(self.order, 0, -1):
             prev_words.append(self.random_sent[len(self.random_sent)-i])
@@ -98,7 +96,7 @@ class Markov(dict):
         return choice
 
     def get_sentence(self):
-    # generates the sentence using sample() to get next
+        '''generates the sentence using sample() to get next'''
         self.create_random_seed()
         next = ""
         while next != "STOP":
@@ -122,7 +120,7 @@ def main():
     if len(arguments) == 2:
         words = utility.read(arguments[0])
         words = utility.cleanse(words)
-        histogram = Markov(words, int(arguments[1])+1)
+        histogram = Markov(words, int(arguments[1]))
         histogram.count_to_possibility()
         print(histogram.get_sentence())
 

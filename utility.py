@@ -17,7 +17,8 @@ def cleanse(text):
     sents = nltk.sent_tokenize(text)
     for ind, sentences in enumerate(sents):
         sents[ind] = 'START ' + sentences[:len(sentences)-1] + ' STOP'
-    words = nltk.word_tokenize(' '.join(sents))
+    # not the best way of doing it but works
+    words = ' '.join(sents).split()
     return words
 
 def read(source):
