@@ -21,3 +21,20 @@ for(let i=0; i<mySelect.options.length; i++){
     conversionObj = Object.assign(conversionObj, {[mySelect.options[i].value]: mySelect.options[i].text})
     localStorage[mySelect.options[i].value] =  mySelect.options[i].text
 }
+
+
+function loadScript (dir, file) {
+    var scr = document.createElement("script")
+    scr.src = dir + file
+    document.body.appendChild(scr)
+}
+const sentence = document.getElementById('sentence-to-show').innerText
+const options = {
+    strings: [sentence],
+    typeSpeed: 15,
+    backDelay: 700,
+    backSpeed: 20,
+    cursorChar: "",
+};
+const typed = new Typed("#typed", options);
+ 

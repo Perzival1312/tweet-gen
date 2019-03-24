@@ -5,15 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>tweet-gen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
     {% assets "scss_all" %}
         <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
     {% endassets %}
-    <!-- <link href="../static/all.css" rel="stylesheet" type="text/scss"> -->
 </head>
 <body>
 
     <div class="Sentence">
-        <h2>{{test}}</h2>
+        <h2 id="sentence-to-show" hidden=true>{{test}}</h2>
+        <h2 id="typed"></h2>
     </div>
 
     <div class="Sharing">
