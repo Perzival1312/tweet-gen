@@ -14,6 +14,7 @@ headers = {"Authorization": "Bearer "+access_token}
 url = "https://api.imgur.com/3/upload"
 
 def post(img):
+    '''posts image to imgur'''
     j1 = requests.post(
         url, 
         headers = headers,
@@ -30,6 +31,8 @@ def post(img):
     print(data['link'], data['id'], data['deletehash'])
 
 def prepare(sentence):
+    '''Takes a sentence and turns it into a picture with a black 
+    background with the sentence in green pasted onto it.'''
     buffered = BytesIO()
     # imports font and creates sentence with appropriate \n
     fnt = ImageFont.truetype('./static/fonts/GermaniaOne-Regular.ttf', size=32)
