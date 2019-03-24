@@ -2,7 +2,7 @@ import base64
 from base64 import b64encode
 import json, os
 import requests
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
 import textwrap
 
@@ -31,11 +31,20 @@ def post(img):
 
 def prepare(sentence):
     buffered = BytesIO()
-    blank_image = Image.new('RGB', (400, 300), 'black')
-    img_draw = ImageDraw.Draw(blank_image)
-    split_txt = textwrap.wrap(sentence, width=50)
+    # imports font and creates sentence with appropriate \n
+    fnt = ImageFont.truetype('./static/fonts/GermaniaOne-Regular.ttf', size=32)
+    split_txt = textwrap.wrap(sentence, width=34)
     split_txt = '\n'.join(split_txt)
-    img_draw.multiline_text((70, 70), split_txt, fill='green')
+    # create black bg image
+    blank_image = Image.new('RGB', (480, 640), 'black')
+    img_draw = ImageDraw.Draw(blank_image)
+    # draw text
+    img_draw.multiline_text((20, 20), split_txt, font=fnt, fill='green')
+    # save image
     blank_image.save(buffered, format="JPEG")
+    # convert to base64 string to upload to imgur
     img_str = base64.b64encode(buffered.getvalue())
     return img_str
+
+if __name__ == '__main__':
+    post(prepare('My Maker has upgraded me!'))
