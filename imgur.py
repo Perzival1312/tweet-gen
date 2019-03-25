@@ -27,8 +27,8 @@ def post(img):
         }
     )
     data = json.loads(j1.text)['data']
-    print(data)
-    print(data['link'], data['id'], data['deletehash'])
+    # print(data)
+    # print(data['link'], data['id'], data['deletehash'])
 
 def prepare(sentence):
     '''Takes a sentence and turns it into a picture with a black 

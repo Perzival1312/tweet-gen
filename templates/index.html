@@ -19,24 +19,14 @@
 
     <div class="Sharing">
         <h3>Share</h3>
-        <!-- need to make this bit of HTML DRY, there is a method to change the location for the button -->
-        <form action="/" method="post" id="saveSent">
-            <input type="text" name="sentence" value="{{test}}" hidden=true>
-            <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
-        </form>
-        <button type="submit" value="Submit" class="btn-link" form="saveSent" hidden=true> Save Sentence </button>
         
         <form action="/share/twitter" method="POST" id="tShareSent">
             <input type="text" name="sentence" value="{{test}}" hidden=true>
             <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
         </form>
         <button class="twitter" type="submit" value="Submit" form="tShareSent"> Share to Twitter</button>
-        
-        <form action="/share/imgur" method="POST" id="IShareSent">
-            <input type="text" name="sentence" value="{{test}}" hidden=true>
-            <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
-        </form>
-        <button class="imgur" type="submit" value="Submit" form="IShareSent">
+
+        <button class="imgur" type="submit" value="Submit" form="tShareSent" formaction="/share/imgur">
             <img src="https://s.imgur.com/desktop-assets/desktop-assets/icon-new-post.13ab64f9f36ad8f25ae3544b350e2ae1.svg" alt="Share to"> Imgur</button>
 
     </div>
@@ -48,9 +38,9 @@
             <option value="modestproposal">A Modest Proposal</option>
             <option value="prideprejudice">Pride and Prejudice</option>
             <option value="secretgarden">The Secret Garden</option>
-            <!-- <option value="taletwocities">A Tale of Two Cities</option> -->
             <option value="huckleberryfinn">Huckleberry Finn</option>
-            <!-- <option value="jekyllhyde">Jekyll and Hyde</option>
+            <!-- <option value="taletwocities">A Tale of Two Cities</option>
+            <option value="jekyllhyde">Jekyll and Hyde</option>
             <option value="mobydick">Moby Dick</option>
             <option value="tomsawyer">Tom Sawyer</option>
             <option value="scarletletter">The Scarlet Letter</option>
@@ -73,7 +63,6 @@
 
     <div class="Show-Saved">
         <h3>View Shared</h3>
-        <!-- <button class="local" onclick="location.href='/saved' "> Show Saved </button> -->
         <button class="twitter" onclick="location.href='https://twitter.com/JustABo49350876'"></button>
         <button class="imgur" onclick="location.href='https://imgur.com/user/justabotthatwantstomakememes/posts'">........................</button>
     </div>
