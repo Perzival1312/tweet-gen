@@ -22,7 +22,7 @@ for(let i=0; i<mySelect.options.length; i++){
     localStorage[mySelect.options[i].value] =  mySelect.options[i].text
 }
 
-
+// STUFF TO MAKE SENTENCE LOOK LIKE ITS TYPED
 function loadScript (dir, file) {
     var scr = document.createElement("script")
     scr.src = dir + file
