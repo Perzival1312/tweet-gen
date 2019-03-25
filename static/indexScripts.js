@@ -1,10 +1,12 @@
 const body = document.getElementsByTagName('body')[0];
 const all = document.getElementsByTagName("*");
+const mySelect = document.getElementById('source-selector');
 let sourceName = document.getElementById('source-for-selector').defaultValue;
+
 let beginSliceInd = sourceName.indexOf('/');
 let endSliceIndex = sourceName.indexOf('.');
 sourceName  = sourceName.slice(beginSliceInd+1, endSliceIndex);
-const mySelect = document.getElementById('source-selector');
+
 // sets correct value to dropdown menu and applys specific styles
 for(let i, j = 0; i = mySelect.options[j]; j++) {
     if(i.value == sourceName) {
@@ -15,6 +17,7 @@ for(let i, j = 0; i = mySelect.options[j]; j++) {
         break;
     }
 }
+
 // gets the conversion table for titles so that they are "readable"
 let conversionObj = {}
 for(let i=0; i<mySelect.options.length; i++){
@@ -23,12 +26,14 @@ for(let i=0; i<mySelect.options.length; i++){
 }
 
 // STUFF TO MAKE SENTENCE LOOK LIKE ITS TYPED
+const sentence = document.getElementById('sentence-to-show').innerText
+
 function loadScript (dir, file) {
     var scr = document.createElement("script")
     scr.src = dir + file
     document.body.appendChild(scr)
 }
-const sentence = document.getElementById('sentence-to-show').innerText
+
 const options = {
     strings: [sentence],
     typeSpeed: 15,
@@ -36,5 +41,6 @@ const options = {
     backSpeed: 20,
     cursorChar: "",
 };
+
 const typed = new Typed("#typed", options);
  

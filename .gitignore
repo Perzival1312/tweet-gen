@@ -1,13 +1,10 @@
 texts.txt
-texts_master_list.txt
 sources/
 venv/
 __pycache__/
 .DS_Store
 .pytest_cache/
 .json
-Future.txt
-facebook.py
-env-setup.sh
 .webassets-cache
 all.css
+general-noncommited/
