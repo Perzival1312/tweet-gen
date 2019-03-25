@@ -26,7 +26,7 @@ def post(img):
             'title': 'Title'
         }
     )
-    data = json.loads(j1.text)['data']
+    # data = json.loads(j1.text)['data']
     # print(data)
     # print(data['link'], data['id'], data['deletehash'])
 

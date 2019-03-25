@@ -56,7 +56,7 @@ body {
             cursor: pointer;
         }
     }
-
+    
     .New-Sentence {
         display: flex;
         flex-direction: column;
@@ -88,30 +88,30 @@ body {
             padding-bottom: 2px;
         }
     }
-
+    
     .Show-Saved {
         color: rgb(0, 0, 0);
         text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
         display: flex;
         flex-direction: column;
         .imgur {
-            background-image: url("./images/imgur_logo.png");            
+            background-image: url("./images/imgur_logo.png");  
+            background-color: rgb(54, 190, 116);
             height: 40px;
             width: 100px;
         }
         .twitter {
             background-image: url("./images/twitter_logo.png");
+            background-color: #eeeded;
             height: 40px;
             width: 100px;
         }
         .imgur, .twitter {
             line-height: 0;
             margin: 5px;
-            color: rgba(000, 000, 000, 0);
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: #eeeded;
             border: none;
         }
         .imgur:hover, .twitter:hover {
@@ -130,7 +130,7 @@ body {
     }
     .New-Sentence {
         position: absolute;
-        top: 75vh;
+        top: 78vh;
         left: 40vw;
     }
     .Show-Saved {
@@ -170,9 +170,6 @@ body {
     }
     .Show-Saved, .Sharing {
         top: 75vh;
-    }
-    .New-Sentence {
-        top: 78vh;
     }
 }
 
