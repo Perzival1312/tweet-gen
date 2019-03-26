@@ -26,7 +26,7 @@ for(let i=0; i<mySelect.options.length; i++){
 }
 
 // STUFF TO MAKE SENTENCE LOOK LIKE ITS TYPED
-const sentence = document.getElementById('sentence-to-show').innerText
+let sentence = document.getElementById('sentence-to-show').innerText
 
 function loadScript (dir, file) {
     var scr = document.createElement("script")
@@ -34,7 +34,7 @@ function loadScript (dir, file) {
     document.body.appendChild(scr)
 }
 
-const options = {
+let options = {
     strings: [sentence],
     typeSpeed: 15,
     backDelay: 700,
@@ -42,5 +42,36 @@ const options = {
     cursorChar: "",
 };
 
-const typed = new Typed("#typed", options);
+let typed = new Typed("#typed", options);
+
+function resetTyped(newTexts) {
+    const dataType = newTexts;
+    if (dataType === undefined) {
+      return false;
+    }
+    const strings = ['', dataType];
+    if(typed && typed.constructor === Typed) {
+      typed.destroy();
+    }
+    typed = new Typed('#typed', {
+        strings: strings,
+        typeSpeed: 15,
+        backDelay: 700,
+        backSpeed: 20,
+        cursorChar: "",
+    });
+};
+
+// Vanilla
+function new_sentence() {
+    const httpRequest = new XMLHttpRequest()
+    httpRequest.open('POST', `/sentence/${sourceName}`, true)
+    httpRequest.send()
+    httpRequest.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            sentence = this.responseText
+            resetTyped(sentence)
+        }
+    }
+}
  

@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Saved Quotes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../static/style.css" rel="stylesheet" type="text/css">
+    {% assets "scss_all" %}
+        <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+    {% endassets %}
 </head>
 <body>
     <button onclick="location.href=`/sentence/{{return_to}}`"> Home </button>
@@ -14,7 +16,6 @@
     <div id="sentence-array">
         {{sentences}}
     </div>
-    {{source}}
     
     <script src="../static/savedScripts.js"></script>
 </body>
