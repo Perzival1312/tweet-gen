@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>tweet-gen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Prevent Favicon.ico request -->
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <!-- typed.js library -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
+    <!-- Sassy CSS -->
     {% assets "scss_all" %}
         <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
     {% endassets %}
@@ -24,11 +28,11 @@
             <input type="text" name="sentence" value="{{test}}" hidden=true>
             <input type="text" name="source" value="{{sentence_source}}" hidden=true id="source-for-selector">
         </form>
+        
         <button class="twitter" type="submit" value="Submit" form="tShareSent"> Share to Twitter</button>
 
         <button class="imgur" type="submit" value="Submit" form="tShareSent" formaction="/share/imgur">
             <img src="https://s.imgur.com/desktop-assets/desktop-assets/icon-new-post.13ab64f9f36ad8f25ae3544b350e2ae1.svg" alt="Share to"> Imgur</button>
-
     </div>
 
     <div class="New-Sentence">
@@ -66,7 +70,8 @@
         <button class="twitter" onclick="location.href='https://twitter.com/JustABo49350876'"></button>
         <button class="imgur" onclick="location.href='https://imgur.com/user/justabotthatwantstomakememes/posts'"></button>
     </div>
-    
+
+    <!-- custom JS -->
     <script src="../static/indexScripts.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
-from flask import (Flask, render_template, redirect, url_for, make_response, flash, request, session, jsonify)
+from flask import (Flask, render_template, redirect, url_for, 
+                    make_response, flash, request, session, jsonify)
 import mongoengine
 from pymongo import MongoClient 
 from mongoengine import (Document, connect, StringField)
@@ -88,14 +89,7 @@ def new_sentence(source_name):
 @app.route('/sentence/<source_name>', methods=['POST'])
 def AJAX_new_sentence(source_name):
     sentence, title = get_new_sentence(source_name)
-    return sentence# jsonify({'text': sentence})
-    # print(new)
-    # return new
-    # session['source'] = source_name
-    # source = sources.objects(title__icontains = source_name).first()
-    # histogram = Markov.from_dict(json.loads(source['markov_model']))
-    # sentence = histogram.get_sentence()
-    # return render_template('index.html', test = sentence, sentence_source = source['title'])
+    return sentence
 
 ## ------------------------------------ ##
 
