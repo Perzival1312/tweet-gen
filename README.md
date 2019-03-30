@@ -12,6 +12,6 @@ https://jj-tweeter.herokuapp.com/
 2. Attain and use a custom domain name
 3. Overhaul UI
 
-### Continuation/offshoot idea
-#### Make it change the tone of a user entered sentence to a selected tone
+## Continuation/offshoot idea
+ Make it change the tone of a user entered sentence to a selected tone
 
