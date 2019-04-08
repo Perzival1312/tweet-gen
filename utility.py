@@ -7,9 +7,11 @@ nltk.download('punkt')
 def cleanse(text):
     '''Cleans and tokenizes input text'''
     # turn text into one long string
+    # find where important text lies
     # remove everything before the important text
     # remove everything after the important text
-    # add start and stop tokens
+    # add start and stop tokens to the 
+    # beginning and end of the sentence respectively
     # turn into array of individual words
     text = ' '.join(text)
     text = re.sub(r'(.|\n)*(\*{2,3}[ ]?(START OF).*(\n)?.*\*{2,3})', "", text, count=1)
@@ -35,3 +37,49 @@ def read(source):
         # print(repr(text), "is not a file")
         word_list = texts_list
     return word_list
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
