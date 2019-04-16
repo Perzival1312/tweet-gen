@@ -7,4 +7,4 @@ word_list = utility.read(source)
 word_list = utility.cleanse(word_list)
 
 histogram = Dictogram(word_list)
-print(histogram['the'])
+print(histogram["the"])

@@ -1,7 +1,8 @@
 import string, sys, random
+
 string.punctuation += "”“’‘—"
 
-f = open(str(sys.argv[1:2][0]), 'r')
+f = open(str(sys.argv[1:2][0]), "r")
 word_list = f.readlines()
 f.close()
 
@@ -37,22 +38,24 @@ sampling = []
 for sets in histogram:
     total += sets[1]
 for index, sets in enumerate(histogram):
-    if index-1 >= 0:
-        sets[1] = (sets[1]/total) + histogram[index-1][1]
+    if index - 1 >= 0:
+        sets[1] = (sets[1] / total) + histogram[index - 1][1]
     else:
-        sets[1] = sets[1]/total
+        sets[1] = sets[1] / total
+
 
 def sample():
     chance = random.random()
     choice = ""
     for index, sets in enumerate(histogram):
-        if index-1 >= 0:
-            if chance < sets[1] and chance > histogram[index-1][1]:
+        if index - 1 >= 0:
+            if chance < sets[1] and chance > histogram[index - 1][1]:
                 choice = sets[0]
         else:
             if chance < sets[1]:
                 choice = sets[0]
     return choice
+
 
 for _ in range(times):
     selected = sample()

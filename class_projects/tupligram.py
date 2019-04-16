@@ -1,7 +1,8 @@
 import sys, string
+
 string.punctuation += "”“’‘—"
 
-f = open(str(sys.argv[1:][0]), 'r')
+f = open(str(sys.argv[1:][0]), "r")
 word_list = f.readlines()
 f.close()
 
@@ -13,6 +14,7 @@ for strings in word_list:
     words_list += strings.split()
 for word in range(len(words_list)):
     words_list[word] = words_list[word].translate(table).lower()
+
 
 def make_histogram(source):
     histogram = []
@@ -26,28 +28,31 @@ def make_histogram(source):
         histogram.append((words, count))
     return list(set(histogram))
 
+
 def make_histogram_2(source):
-    histogram = [('test', [0])]
+    histogram = [("test", [0])]
     for word in source:
         for wtuple in histogram:
             if wtuple[0] == word:
                 old = wtuple[1][0]
-                wtuple[1][:] = [1+old]
+                wtuple[1][:] = [1 + old]
                 break
         else:
             histogram.append((word, [1]))
     return histogram
 
+
 def make_histogram_3(source):
     for word in source:
         for wtuple in histogram:
             if wtuple[0] == word:
-                histogram.append((word, wtuple[1]+1))
+                histogram.append((word, wtuple[1] + 1))
                 histogram.remove(wtuple)
                 break
         else:
             histogram.append((word, 1))
     return histogram
+
 
 histogram = make_histogram_3(words_list)
 print(histogram)

@@ -1,10 +1,10 @@
 import sys, string
+
 string.punctuation += "”“’‘—"
 
-f = open(str(sys.argv[1:][0]), 'r')
+f = open(str(sys.argv[1:][0]), "r")
 word_list = f.readlines()
 f.close()
-
 
 
 histogram = {}
@@ -16,6 +16,7 @@ for strings in word_list:
 for word in range(len(words_list)):
     words_list[word] = words_list[word].translate(table).lower()
 
+
 def make_histogram(source):
     histogram = {}
     for words in source:
@@ -25,6 +26,7 @@ def make_histogram(source):
             histogram[words] = 1
     return histogram
 
+
 def unique_words(histogram):
     unique_word_counter = 0
     for values in histogram.items():
@@ -32,13 +34,15 @@ def unique_words(histogram):
             unique_word_counter += 1
     return unique_word_counter
 
+
 def frequency(word, histogram):
     if word in histogram:
         return histogram[word]
     else:
-        return("word is not in source text")
+        return "word is not in source text"
+
 
 histogram = make_histogram(words_list)
 print(histogram)
 unique_words(histogram)
-frequency('the', histogram)
+frequency("the", histogram)

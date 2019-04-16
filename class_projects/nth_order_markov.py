@@ -15,6 +15,7 @@ import sys, string, utility, random
 # {(word1, word2) : [word3, count]}
 # {(word2, word3) : STOPS}
 
+
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
 
@@ -28,23 +29,23 @@ class Dictogram(dict):
         for ind, word in enumerate(words_list):
             word_set = [word]
             try:
-                for i in range(1, self.order-1):
+                for i in range(1, self.order - 1):
                     word_set.append(words_list[ind + i])
             except IndexError:
                 if self.order == 1:
                     pass
                 else:
                     self.order -= 1
-                    continue                
+                    continue
             word_set = tuple(word_set)
             if (word_set) in self:
                 try:
-                    if words_list[ind+self.order-1] in self[word_set]:
+                    if words_list[ind + self.order - 1] in self[word_set]:
                         # in first and inset
-                        self[word_set][0][words_list[ind+self.order-1]] += 1
+                        self[word_set][0][words_list[ind + self.order - 1]] += 1
                     else:
                         # in first but not inset
-                        self[word_set][0][words_list[ind+self.order-1]] = 1
+                        self[word_set][0][words_list[ind + self.order - 1]] = 1
                     self[word_set][1] += 1
                 except IndexError:
                     pass
@@ -52,7 +53,7 @@ class Dictogram(dict):
                 try:
                     # new word
                     self[word_set] = [{}, 1]
-                    self[word_set][0][words_list[ind+self.order-1]] =  1
+                    self[word_set][0][words_list[ind + self.order - 1]] = 1
                 except IndexError:
                     pass
         self.order = self.original_order
@@ -65,32 +66,31 @@ class Dictogram(dict):
                 possibilies.append(key)
         self.random_sent = list(random.choice(possibilies))
 
-    
     def count_to_possibility(self):
         for values in self.values():
             prev_val = 0
             for key, value in values[0].items():
-                values[0][key] = value/values[1]+prev_val
+                values[0][key] = value / values[1] + prev_val
                 prev_val = values[0][key]
 
     def sample(self):
         prev_word = []
-        for i in range(self.order-1, 0, -1):
-            prev_word.append(self.random_sent[len(self.random_sent)-i])
+        for i in range(self.order - 1, 0, -1):
+            prev_word.append(self.random_sent[len(self.random_sent) - i])
         prev_word = tuple(prev_word)
         chance = random.random()
         prev_val = 0
         choice = ""
         if prev_word not in self:
             print(prev_word)
-            # return 
+            # return
         else:
             for key, value in self[prev_word][0].items():
                 if chance < value and chance > prev_val:
                     choice = key
                     break
                 prev_val = self[prev_word][0][key]
-        
+
         return choice
 
     def get_sentence(self):
@@ -98,29 +98,31 @@ class Dictogram(dict):
         next = ""
         while next != "STOP":
             next = self.sample()
-            if next != "START" and next != '':
+            if next != "START" and next != "":
                 self.random_sent.append(next)
         # except KeyError:
         #     self.get_sentence()
         # except RecursionError:
         #     pass
-    
+
     def print_sentence(self):
-        sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
-        return sentence[0].capitalize() + sentence[1:] + '.'
+        sentence = " ".join(self.random_sent[1 : len(self.random_sent) - 1])
+        return sentence[0].capitalize() + sentence[1:] + "."
 
 
 def main():
     import sys
+
     arguments = sys.argv[1:]  # Exclude script name in first argument
     if len(arguments) == 2:
         words = utility.read(arguments[0])
         words = utility.cleanse(words)
         # if arg[1] < 1 raise value error
-        histogram = Dictogram(words, int(arguments[1])+1)
+        histogram = Dictogram(words, int(arguments[1]) + 1)
         histogram.count_to_possibility()
         histogram.get_sentence()
         print(histogram.print_sentence())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

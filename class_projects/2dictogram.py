@@ -4,6 +4,7 @@
 # {word: [count, {words: [count, {word: count}, total]}, total]}
 
 import sys, string, random, utility
+
 source = str(sys.argv[1:2][0])
 words_list = utility.read(source)
 words_list = utility.cleanse(words_list)
@@ -23,7 +24,7 @@ for ind, word in enumerate(words_list):
             pass
     else:
         histogram[word] = [1, {}]
-        try: 
+        try:
             histogram[word][1][words_list[ind + 1]] = 1
             histogram[word].append(1)
         except:
@@ -34,7 +35,7 @@ try:
 except IndexError:
     times = 200
 
-total = 0 
+total = 0
 sampling = {}
 
 for l in histogram.values():
@@ -43,14 +44,14 @@ for l in histogram.values():
 # changes frquency to range of probability of picking key
 prev_val = 0
 for key, value in histogram.items():
-    histogram[key][0] = (value[0]/total)+prev_val
+    histogram[key][0] = (value[0] / total) + prev_val
     prev_val = histogram[key][0]
     prev_next_val = 0
     for key_next, value_next in value[1].items():
-        value[1][key_next] = value_next/value[2]+prev_next_val
+        value[1][key_next] = value_next / value[2] + prev_next_val
         prev_next_val = value[1][key_next]
 
-'''
+"""
     its going to take a word as third arg which will be the first word in the sentence
                     a number as fourth arg which will be the sentnce length
     LOOP:
@@ -59,7 +60,7 @@ for key, value in histogram.items():
                 then get random from that words inset dict
     TODO:
         possibly make a third lvl of dicts or with word pairs as the keys
-'''
+"""
 try:
     random_sent = [str(sys.argv[2:3][0])]
 except IndexError:
@@ -67,7 +68,7 @@ except IndexError:
 
 # gets a random word based on frequency range
 def sample():
-    prev_word = random_sent[len(random_sent)-1]
+    prev_word = random_sent[len(random_sent) - 1]
     chance = random.random()
     prev_val = 0
     choice = ""
@@ -76,6 +77,7 @@ def sample():
             choice = key
         prev_val = histogram[prev_word][1][key]
     return choice
+
 
 for _ in range(times):
     next = sample()

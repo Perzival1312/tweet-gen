@@ -1,7 +1,8 @@
 import sys, string
+
 string.punctuation += "”“’‘—"
 
-f = open(str(sys.argv[1:][0]), 'r')
+f = open(str(sys.argv[1:][0]), "r")
 word_list = f.readlines()
 f.close()
 
@@ -21,7 +22,7 @@ for words in words_list:
         histogram[words] = 1
 
 counts = histogram.values()
-eff_hist = [[] for _ in range((max(counts)+1))]
+eff_hist = [[] for _ in range((max(counts) + 1))]
 fin_hist = []
 l = []
 

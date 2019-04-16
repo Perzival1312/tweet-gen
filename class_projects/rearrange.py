@@ -1,4 +1,5 @@
 import random, sys
+
 str_input = sys.argv[1:]
 
 # shuffled = []
@@ -46,12 +47,12 @@ str_input = sys.argv[1:]
 # String Reversal
 
 for index, words in enumerate(str_input):
-    str_input[index] =  words[::-1]
+    str_input[index] = words[::-1]
 str_input = str_input[::-1]
 cowsay_string = " ".join(str_input)
-top_string = "".join(['_'] * (len(cowsay_string)+1))
-space_string = "".join([' '] * (len(cowsay_string)+1))
-bottom_string = "".join(['-'] * (len(cowsay_string)+1))
+top_string = "".join(["_"] * (len(cowsay_string) + 1))
+space_string = "".join([" "] * (len(cowsay_string) + 1))
+bottom_string = "".join(["-"] * (len(cowsay_string) + 1))
 
 s = """
  {}

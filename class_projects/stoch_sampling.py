@@ -1,7 +1,8 @@
 import string, sys, random
+
 string.punctuation += "”“’‘—"
 
-f = open(str(sys.argv[1:2][0]), 'r')
+f = open(str(sys.argv[1:2][0]), "r")
 word_list = f.readlines()
 f.close()
 
@@ -25,9 +26,10 @@ try:
 except IndexError:
     times = 1000
 
-letter_value = '0'+string.ascii_lowercase
+letter_value = "0" + string.ascii_lowercase
 # total = sum(histogram.values())
 sampling = {}
+
 
 def get_weighted_total():
     total = 0
@@ -35,13 +37,15 @@ def get_weighted_total():
         total += letter_value.index(key[0])
         total += value
     return total
+
+
 total = get_weighted_total()
 print(total)
 
 # changes frquency to range of probability of picking key
 prev_val = 0
 for key, value in histogram.items():
-    histogram[key] = ((value+letter_value.index(key[0]))/total)+prev_val
+    histogram[key] = ((value + letter_value.index(key[0])) / total) + prev_val
     prev_val = histogram[key]
 
 # gets a random word based on frequency range
@@ -55,6 +59,7 @@ def sample():
         prev_val = histogram[key]
     return choice
 
+
 for _ in range(times):
     word = sample()
     if word in sampling:
@@ -64,4 +69,4 @@ for _ in range(times):
 
 print(histogram)
 print(sampling)
-print(letter_value.index('a'))
+print(letter_value.index("a"))

@@ -1,6 +1,7 @@
 import random, sys, input_validation, os
 from PyDictionary import PyDictionary
-f = open('/usr/share/dict/words', 'r')
+
+f = open("/usr/share/dict/words", "r")
 words_list = f.readlines()
 f.close()
 cont = True

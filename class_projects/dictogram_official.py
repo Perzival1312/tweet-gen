@@ -35,16 +35,16 @@ class Dictogram(dict):
             return self[word]
         else:
             return 0
-    
+
     def count_to_possibility(self):
         for value in self.values():
             prev_next_val = 0
             for key_next, value_next in value[1].items():
-                value[1][key_next] = value_next/value[2]+prev_next_val
+                value[1][key_next] = value_next / value[2] + prev_next_val
                 prev_next_val = value[1][key_next]
 
     def sample(self):
-        prev_word = self.random_sent[len(self.random_sent)-1]
+        prev_word = self.random_sent[len(self.random_sent) - 1]
         chance = random.random()
         prev_val = 0
         choice = ""
@@ -61,14 +61,15 @@ class Dictogram(dict):
             next = self.sample()
             if next != "START":
                 self.random_sent.append(next)
-    
+
     def print_sentence(self):
-        sentence = " ".join(self.random_sent[1:len(self.random_sent)-1])
-        return sentence[0].capitalize() + sentence[1:] + '.'
+        sentence = " ".join(self.random_sent[1 : len(self.random_sent) - 1])
+        return sentence[0].capitalize() + sentence[1:] + "."
 
 
 def main():
     import sys
+
     arguments = sys.argv[1:]  # Exclude script name in first argument
     if len(arguments) == 1:
         words = utility.read(arguments[0])
@@ -78,5 +79,6 @@ def main():
         histogram.get_sentence()
         print(histogram.print_sentence())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
