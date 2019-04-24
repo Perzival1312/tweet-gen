@@ -10,3 +10,4 @@ all.css
 general-noncommited/
 *.pyc
 .env
+docker-compose.yml
