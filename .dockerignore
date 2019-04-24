@@ -1,0 +1,8 @@
+class_projects/
+general-noncommited/
+Scaper/
+__pycache__/
+.pytest_cache/
+venv/
+*.pyc
+*.md
