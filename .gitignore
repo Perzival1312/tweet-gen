@@ -8,3 +8,5 @@ __pycache__/
 .webassets-cache
 all.css
 general-noncommited/
+*.pyc
+.env
